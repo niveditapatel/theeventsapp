@@ -36,7 +36,7 @@ public class EventService {
 
     public String deleteEvent(int id) {
         repository.deleteById(id);
-        return "Product Removed";
+        return "Event Removed";
     }
 
     public Event updateEvent(Event event) {

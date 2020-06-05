@@ -1,7 +1,12 @@
 package com.eventmanagement.eventmanagement.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 public class User {
@@ -13,7 +18,15 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
