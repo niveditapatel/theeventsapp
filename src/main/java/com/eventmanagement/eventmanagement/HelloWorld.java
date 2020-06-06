@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorld {
-    @RequestMapping("/")
     @CrossOrigin("*")
+    @RequestMapping("/")
     public String index() {
-        return "Hello World";
+        return "Hello From Event Management API Spring Boot Application";
     }
 }

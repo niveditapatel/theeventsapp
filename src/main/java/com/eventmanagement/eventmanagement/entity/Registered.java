@@ -1,6 +1,7 @@
 package com.eventmanagement.eventmanagement.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -12,13 +13,14 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table
+@Data
 public class Registered {
 
     @Id
     @GeneratedValue
     private int id;
 
-    private String userid;
+    private String userId;
     private String eventId;
     private String response;
 

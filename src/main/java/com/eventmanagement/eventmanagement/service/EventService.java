@@ -3,13 +3,17 @@ package com.eventmanagement.eventmanagement.service;
 import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
-
 
     @Autowired
     private EventRepository repository;

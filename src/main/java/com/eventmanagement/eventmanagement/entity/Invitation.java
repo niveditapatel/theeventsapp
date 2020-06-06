@@ -1,6 +1,7 @@
 package com.eventmanagement.eventmanagement.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Table
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Invitation {
 
     @Id
@@ -24,43 +26,4 @@ public class Invitation {
     private Date expireDate;
     private String response;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getInvitationType() {
-        return invitationType;
-    }
-
-    public void setInvitationType(String invitationType) {
-        this.invitationType = invitationType;
-    }
-
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
-    }
-
-    public String getResponse() {
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
 }
