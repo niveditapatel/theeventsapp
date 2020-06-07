@@ -16,39 +16,39 @@ import java.util.Optional;
 public class EventService {
 
     @Autowired
-    private EventRepository repository;
+    private EventRepository eventRepository;
 
     public Event saveEvent(Event event) {
-        return repository.save(event);
+        return eventRepository.save(event);
     }
 
     public List<Event> saveEvents(List<Event> events) {
-        return repository.saveAll(events);
+        return eventRepository.saveAll(events);
     }
 
     public List<Event> getEvents() {
-        return repository.findAll();
+        return eventRepository.findAll();
     }
 
     public Event getEventById(int id) {
-        return repository.findById(id).orElse(null);
+        return eventRepository.findById(id).orElse(null);
     }
 
     public Event getEventByTitle(String title) {
-        return repository.findByTitle(title);
+        return eventRepository.findByTitle(title);
     }
 
     public String deleteEvent(int id) {
-        repository.deleteById(id);
+        eventRepository.deleteById(id);
         return "Event Removed";
     }
 
     public Event updateEvent(Event event) {
-        Event existingEvent = repository.findById(event.getId()).orElse(null);
+        Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
         existingEvent.setTitle(event.getTitle());
         existingEvent.setDescription(event.getDescription());
         existingEvent.setOrganization(event.getOrganization());
-        return repository.save(existingEvent);
+        return eventRepository.save(existingEvent);
     }
 
 }

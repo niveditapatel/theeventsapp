@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +15,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue
+    @Column(name = "user_id")
     private int id;
     @Column(unique = true)
     private String email;
@@ -21,4 +23,15 @@ public class User {
     private String firstName;
     private String lastName;
     private String status;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public User(User user) {
+        this.status = user.status;
+        this.password = user.password;
+        this.email = user.email;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+    }
 }

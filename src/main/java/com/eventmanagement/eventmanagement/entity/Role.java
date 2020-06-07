@@ -8,19 +8,16 @@ import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table
 @Data
-public class Registered {
+@Entity
+@Table(name = "role")
+public class Role {
 
     @Id
     @GeneratedValue
-    @Column(name = "register_id")
+    @Column(name = "role_id")
     private int id;
 
-    private String userId;
-    private String eventId;
-    private String response;
-
+    private String role;
 
 }
