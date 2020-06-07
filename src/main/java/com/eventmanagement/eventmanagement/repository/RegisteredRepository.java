@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RegisteredRepository extends JpaRepository<Registered, Integer> {
 
 
-    Event findByTitle(String title);
 }

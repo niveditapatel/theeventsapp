@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface InvitationRepository extends JpaRepository<Invitation, Integer> {
 
 
-    Event findByTitle(String title);
 }
