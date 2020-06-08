@@ -12,48 +12,48 @@ import java.util.List;
 public class EventController {
 
     @Autowired
-    private EventService service;
+    private EventService eventService;
 
     @PostMapping("/addEvent")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event addEvent(@RequestBody Event event) {
-        return service.saveEvent(event);
+        return eventService.saveEvent(event);
     }
 
     @PostMapping("/addEvents")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Event> addEvents(@RequestBody List<Event> events) {
-        return service.saveEvents(events);
+        return eventService.saveEvents(events);
     }
 
     @GetMapping("/events")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Event> findAllEvents() {
-        return service.getEvents();
+        return eventService.getEvents();
     }
 
     @GetMapping("/eventsById/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event findEventById(@PathVariable int id) {
-        return service.getEventById(id);
+        return eventService.getEventById(id);
     }
 
-    @GetMapping("/eventsByTitle/{title}")
+    @GetMapping("/eventByTitle/{title}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event findEventByTitle(@PathVariable String title) {
-        return service.getEventByTitle(title);
+        return eventService.getEventByTitle(title);
     }
 
     @PutMapping("/updateEvent")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event updateEvent(@RequestBody Event event) {
-        return service.updateEvent(event);
+        return eventService.updateEvent(event);
     }
 
     @DeleteMapping("/deleteEvent/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public String deleteEvent(@PathVariable int id) {
-        return service.deleteEvent(id);
+        return eventService.deleteEvent(id);
     }
 
 }

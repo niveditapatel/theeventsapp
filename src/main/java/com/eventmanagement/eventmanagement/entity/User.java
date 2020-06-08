@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -23,9 +25,25 @@ public class User {
     private String firstName;
     private String lastName;
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+
+    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name="user_role",
+            joinColumns=@JoinColumn(name="user_id"),
+            inverseJoinColumns=@JoinColumn(name="role_id"))
+    private List<Role> roles;
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<Role> roles)
+    {
+        this.roles = roles;
+    }
 
     public User(User user) {
         this.status = user.status;
@@ -33,5 +51,6 @@ public class User {
         this.email = user.email;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
+        this.roles = user.roles;
     }
 }

@@ -14,8 +14,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(passwordEncoder().encode("hello"));
+        System.out.println(passwordEncoder().encode("mmn"));
 
     }
 
 }
+/*
+
+Users
+
+mufaddal.naya@gmail.com  -> hello    -> Admin
+mmm@gmail.com            -> mmn      -> Creator
+mmn_new@gmail.com        -> mmn_new  ->User
+
+ */
