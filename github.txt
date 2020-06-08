@@ -1,5 +1,0 @@
-mufaddal
-
-mufaddal-hello
-
-mufaddal-hi
