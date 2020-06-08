@@ -20,6 +20,7 @@ public class Invitation {
     private int id;
 
     private String email;
+    private int eventId;
     private String invitationType;
     private Date expireDate;
     private String response;

@@ -67,10 +67,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.authorizeRequests()
+//                .anyRequest().permitAll();
                 .antMatchers("/public/**").permitAll()
                 .antMatchers("/api/deleteEvent/**").hasRole("ADMIN")
                 .antMatchers("/api/addEvent**", "/updateEvent").hasAnyRole("ADMIN", "CREATOR")
-                .antMatchers("/eventByTitle/**","/eventsById/**","/events").authenticated()
+                .antMatchers("/eventByTitle/**","/eventsById/**","/events","/login").authenticated()
                 .and()
                 .httpBasic();
         //Without Any Role Authorization
