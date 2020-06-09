@@ -1,17 +1,13 @@
 package com.eventmanagement.eventmanagement.entity;
 
-import com.eventmanagement.eventmanagement.repository.UserRepository;
-import com.eventmanagement.eventmanagement.service.EventService;
-import com.eventmanagement.eventmanagement.service.UserService;
+import com.eventmanagement.eventmanagement.service.GroupService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +15,7 @@ import java.util.StringTokenizer;
 @Entity
 @Table(name = "group_table")
 public class Group<results> {
+
 
     @Id
     @GeneratedValue
@@ -38,33 +35,6 @@ public class Group<results> {
 
 
     private List <User> users;
-
-   /* public void getEmails() throws Exception{
-
-        String sql = "SELECT column_name from information_schema.columns where table_name='suppliers'";
-
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery(sql);
-        // extract values from rs
-
-
-    } */
-            /*=getEmails(groupusers);
-    @Autowired
-    private UserRepository userRepository;
-    public List <String> getEmails(String groupusers)
-    { List <User> list = null;
-
-        String CSV = groupusers;
-        StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
-        while (tokenizer.hasMoreTokens())
-        {
-       list.add(userRepository.findbyEmail(tokenizer.nextToken()));
-
-        }
-        return list;
-    }*/
-
 
 
     public void addUser(User user) {

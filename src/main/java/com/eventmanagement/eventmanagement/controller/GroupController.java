@@ -7,11 +7,10 @@ import com.eventmanagement.eventmanagement.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api")
 public class GroupController {
+
 
     @Autowired
     private GroupService groupService;
@@ -22,12 +21,26 @@ public class GroupController {
         return groupService.saveGroup(group);
     }
 
-   @GetMapping("/getuser/{email}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public List<User> findByEmail(@PathVariable String email) {
-      return groupService.findByEmail(email);
-   }
+    @PostMapping("/enterintogroupuser/{gid}/{uid}")
+  @CrossOrigin(origins = "http://localhost:3000")
+    public void enterintogroupuser(@PathVariable Integer gid, @PathVariable Integer uid) {
+         groupService.enterintogroupuser(gid,uid);
     }
+
+    @GetMapping("/getuser/{email}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public User findByEmail(@PathVariable String email) {
+        return groupService.findByEmail(email);
+    }
+
+
+
+  /*  @GetMapping("/getusersfromstring/{groupusers}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ArrayList<String> getEmails(String groupusers) {
+        return groupService.getEmails(groupusers);
+    } */
+}
 
 
 

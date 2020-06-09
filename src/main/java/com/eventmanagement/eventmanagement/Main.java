@@ -4,6 +4,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
+
 public class Main {
 
     public static PasswordEncoder passwordEncoder() {
@@ -14,13 +19,19 @@ public class Main {
 
 
 
-       System.out.println(passwordEncoder().encode("niv"));
+     //  System.out.println(passwordEncoder().encode("niv"));
 
 
-       // String CSV = "abc@gmail.com,nivedita@icloud,abc@abd.com";
-        //    StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
-        //    while (tokenizer.hasMoreTokens())
-       //     { System.out.println(tokenizer.nextToken()); }
+        String groupusers = "abc@gmail.com,nivedita@icloud,abc@abd.com";
+        ArrayList<String> list = new ArrayList<String>();
+            String CSV = groupusers;
+                StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
+                while (tokenizer.hasMoreTokens()) {
+                    list.add(tokenizer.nextToken());
+                }
+        list.forEach(System.out::println);
+
+
 
 
     }

@@ -3,15 +3,9 @@ package com.eventmanagement.eventmanagement.service;
 import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.StringTokenizer;
 
 @Service
 public class EventService {
@@ -44,7 +38,14 @@ public class EventService {
         return "Event Removed";
     }
 
-   public Event updateEvent(Event event) {
+    public String findEventDashboard() {
+        return eventRepository.findEventDashboard();
+    }
+    public Integer findEventstoday() {
+        return eventRepository.findEventstoday();
+    }
+
+    public Event updateEvent(Event event) {
         Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
         existingEvent.setTitle(event.getTitle());
         existingEvent.setDescription(event.getDescription());

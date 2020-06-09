@@ -7,6 +7,7 @@ import com.eventmanagement.eventmanagement.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -36,19 +37,21 @@ public class GroupService {
         return groupRepository.findByGroupname(groupname);
     }
 
-    public List<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         return groupRepository.findByEmail(email);
     }
 
-  /*  public List<String> getEmails(String groupusers)
-    { List<String> list = null;
+  public void enterintogroupuser( Integer gid, Integer uid) {
+        groupRepository.enterintogroupuser(gid, uid);
+    }
 
-        String CSV = groupusers;
-           StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
-        while (tokenizer.hasMoreTokens())
-  { System.out.println(tokenizer.nextToken());
-      list.add(tokenizer.nextToken());
-  }
+ /* public ArrayList<String> getEmails(String groupusers)
+    {    ArrayList<String> list = new ArrayList<String>();
+            String CSV = groupusers;
+                StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
+                while (tokenizer.hasMoreTokens()) {
+                    list.add(tokenizer.nextToken());
+                }
         return list;
     } */
 }

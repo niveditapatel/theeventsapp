@@ -56,4 +56,17 @@ public class EventController {
         return eventService.deleteEvent(id);
     }
 
+
+    @GetMapping("/geteventdashboard")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String findEventDashboard () {
+        return eventService.findEventDashboard();
+    }
+
+    @GetMapping("/geteventstoday")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Integer findEventsToday () {
+        return eventService.findEventstoday();
+    }
+
 }
