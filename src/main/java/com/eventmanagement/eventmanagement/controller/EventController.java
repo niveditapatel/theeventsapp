@@ -44,11 +44,11 @@ public class EventController {
         return eventService.getEventByTitle(title);
     }
 
-    @PutMapping("/updateEvent")
+  /*  @PutMapping("/updateEvent")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event updateEvent(@RequestBody Event event) {
         return eventService.updateEvent(event);
-    }
+    }*/
 
     @DeleteMapping("/deleteEvent/{id}")
     @CrossOrigin(origins = "http://localhost:3000")

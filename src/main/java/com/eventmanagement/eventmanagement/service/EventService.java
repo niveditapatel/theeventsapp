@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.StringTokenizer;
 
 @Service
 public class EventService {
@@ -43,12 +44,14 @@ public class EventService {
         return "Event Removed";
     }
 
-    public Event updateEvent(Event event) {
+   public Event updateEvent(Event event) {
         Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
         existingEvent.setTitle(event.getTitle());
         existingEvent.setDescription(event.getDescription());
         existingEvent.setOrganization(event.getOrganization());
         return eventRepository.save(existingEvent);
     }
+
+
 
 }
