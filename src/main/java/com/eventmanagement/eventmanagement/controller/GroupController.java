@@ -6,6 +6,7 @@ import com.eventmanagement.eventmanagement.entity.User;
 import com.eventmanagement.eventmanagement.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -17,14 +18,15 @@ public class GroupController {
 
     @PostMapping("/addGroup")
     @CrossOrigin(origins = "http://localhost:3000")
-    public Group addGroup(@RequestBody Group group) {
+    public Group saveGroup(@RequestBody Group group) {
         return groupService.saveGroup(group);
     }
 
-    //@PostMapping("/viewusers")
-    //@CrossOrigin(origins = "http://localhost:3000")
-    //public List<User> addEvents(@RequestBody List<User> events) {
-       // return eventService.saveEvents(events);
+   @GetMapping("/getuser/{email}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<User> findByEmail(@PathVariable String email) {
+      return groupService.findByEmail(email);
+   }
     }
 
 

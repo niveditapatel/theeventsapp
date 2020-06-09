@@ -1,12 +1,8 @@
 package com.eventmanagement.eventmanagement;
 
-import com.eventmanagement.eventmanagement.entity.Event;
-import com.eventmanagement.eventmanagement.entity.User;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Date;
-import java.util.StringTokenizer;
 
 public class Main {
 
@@ -18,7 +14,7 @@ public class Main {
 
 
 
-       // System.out.println(passwordEncoder().encode("niv"));
+       System.out.println(passwordEncoder().encode("niv"));
 
 
        // String CSV = "abc@gmail.com,nivedita@icloud,abc@abd.com";

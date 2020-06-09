@@ -1,11 +1,8 @@
 package com.eventmanagement.eventmanagement;
 
-import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.entity.User;
-import com.eventmanagement.eventmanagement.service.EventService;
 import com.eventmanagement.eventmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
