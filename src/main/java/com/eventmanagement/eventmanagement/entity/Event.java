@@ -25,6 +25,7 @@ public class Event {
     private String email;
     private String description;
     private String organization;
+    private String place;
     private int duration;
     private Date startDateTime;
     private String type;
