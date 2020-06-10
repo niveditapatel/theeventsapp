@@ -44,16 +44,29 @@ public class EventController {
         return eventService.getEventByTitle(title);
     }
 
-    @PutMapping("/updateEvent")
+  /*  @PutMapping("/updateEvent")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event updateEvent(@RequestBody Event event) {
         return eventService.updateEvent(event);
-    }
+    }*/
 
     @DeleteMapping("/deleteEvent/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public String deleteEvent(@PathVariable int id) {
         return eventService.deleteEvent(id);
+    }
+
+
+    @GetMapping("/geteventdashboard")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String findEventDashboard () {
+        return eventService.findEventDashboard();
+    }
+
+    @GetMapping("/geteventstoday")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Integer findEventsToday () {
+        return eventService.findEventstoday();
     }
 
 }

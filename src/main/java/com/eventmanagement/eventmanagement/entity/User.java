@@ -31,6 +31,8 @@ public class User {
             name="user_role",
             joinColumns=@JoinColumn(name="user_id"),
             inverseJoinColumns=@JoinColumn(name="role_id"))
+
+
     private List<Role> roles;
 
     public void addRole(Role role) {
@@ -40,6 +42,7 @@ public class User {
     public List<Role> getRoles() {
         return roles;
     }
+
     public void setRoles(List<Role> roles)
     {
         this.roles = roles;
