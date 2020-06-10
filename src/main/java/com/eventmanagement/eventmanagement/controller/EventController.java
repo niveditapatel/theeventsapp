@@ -32,7 +32,7 @@ public class EventController {
         return eventService.getEvents();
     }
 
-    @GetMapping("/eventsById/{id}")
+    @GetMapping("/eventById/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event findEventById(@PathVariable int id) {
         return eventService.getEventById(id);

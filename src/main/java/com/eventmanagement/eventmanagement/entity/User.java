@@ -32,6 +32,13 @@ public class User {
             joinColumns=@JoinColumn(name="user_id"),
             inverseJoinColumns=@JoinColumn(name="role_id"))
     private List<Role> roles;
+//
+//    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name="user_event",
+//            joinColumns=@JoinColumn(name="user_id"),
+//            inverseJoinColumns=@JoinColumn(name="event_id"))
+//    private List<Event> events;
 
     public void addRole(Role role) {
         roles.add(role);

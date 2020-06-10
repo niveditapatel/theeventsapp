@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         optionalUser.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
 
         // For debugging purpose
-         System.out.println("sdfsf"+optionalUser.toString());
+         System.out.println(optionalUser.toString());
 
         return optionalUser.map(CustomUserDetails::new).get();
     }

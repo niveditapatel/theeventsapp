@@ -71,7 +71,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/public/**").permitAll()
                 .antMatchers("/api/deleteEvent/**").hasRole("ADMIN")
                 .antMatchers("/api/addEvent**", "/updateEvent").hasAnyRole("ADMIN", "CREATOR")
-                .antMatchers("/eventByTitle/**","/eventsById/**","/events","/login").authenticated()
+                .antMatchers("/api/eventByTitle/**","/api/eventsById/**","/api/events").hasAnyRole("USER", "ADMIN","CREATOR")
+                .antMatchers("/login").authenticated()
                 .and()
                 .httpBasic();
         //Without Any Role Authorization

@@ -8,6 +8,10 @@ import java.util.Date;
 
 public class Main {
 
+    public int add(int a, int b) {
+        return a+b;
+    }
+
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

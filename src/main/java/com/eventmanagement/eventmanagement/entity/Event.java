@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,6 +29,8 @@ public class Event {
     private Date startDateTime;
     private String type;
     private int maxParticipants;
+
+
 
 
 }

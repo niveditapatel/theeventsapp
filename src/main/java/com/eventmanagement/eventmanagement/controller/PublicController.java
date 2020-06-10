@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PublicController {
 
     @CrossOrigin("*")
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String index() {
         return "Hello From Event Management API Spring Boot Application";
     }
