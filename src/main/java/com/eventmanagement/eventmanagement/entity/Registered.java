@@ -18,8 +18,10 @@ public class Registered {
     @Column(name = "register_id")
     private int id;
 
-    private String userId;
-    private String eventId;
+    @Column(name = "userid")
+    private int userId;
+    @Column(name = "eventid")
+    private int eventId;
     private String response;
 
 

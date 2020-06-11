@@ -1,7 +1,9 @@
 package com.eventmanagement.eventmanagement.controller;
 
 import com.eventmanagement.eventmanagement.entity.Event;
+import com.eventmanagement.eventmanagement.entity.EventSender;
 import com.eventmanagement.eventmanagement.service.EventService;
+import com.eventmanagement.eventmanagement.service.RegisteredService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,14 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private RegisteredService registeredService;
+
+    @GetMapping("/eventsByUserId/{user_id}")
+    public List<EventSender> eventsByUserId(@PathVariable int user_id) {
+        return registeredService.eventsByUserId(user_id);
+    }
 
     @PostMapping("/addEvent")
     public Event addEvent(@RequestBody Event event) {
