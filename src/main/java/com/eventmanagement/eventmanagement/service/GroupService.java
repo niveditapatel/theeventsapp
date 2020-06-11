@@ -1,26 +1,30 @@
 package com.eventmanagement.eventmanagement.service;
 
 import com.eventmanagement.eventmanagement.entity.Group;
-import com.eventmanagement.eventmanagement.entity.Email;
+import com.eventmanagement.eventmanagement.entity.GroupReceiver;
 import com.eventmanagement.eventmanagement.entity.User;
 import com.eventmanagement.eventmanagement.repository.GroupRepository;
+import com.eventmanagement.eventmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @Service
 public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
-    public GroupService(GroupRepository groupRepository) {
-        this.groupRepository = groupRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
-    public Group saveGroup(Group group) {
+    public Group saveGroup(GroupReceiver groupReceiver) {
+        Group group = new Group();
+        group.setGroupName(groupReceiver.getName());
+        group.setUsers(getUsers(groupReceiver.getEmail()));
+        group.setCreatorEmail(groupReceiver.getCreatorEmail());
+
         return groupRepository.save(group);
     }
 
@@ -33,25 +37,34 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
-   public List<Group> getUsersingroup(String groupname) {
-        return groupRepository.findByGroupname(groupname);
+    public List<Group> getUsersInGroup(String groupName) {
+//        return groupRepository.findByGroupname(groupname);
+        return null;
     }
 
     public User findByEmail(String email) {
-        return groupRepository.findByEmail(email);
+        return null;
+//        return groupRepository.findByEmail(email);
     }
 
-  public void enterintogroupuser( Integer gid, Integer uid) {
-        groupRepository.enterintogroupuser(gid, uid);
+    public void enterIntoGroupUser(Integer gid, Integer uid) {
+//        groupRepository.enterintogroupuser(gid, uid);
     }
 
- /* public ArrayList<String> getEmails(String groupusers)
-    {    ArrayList<String> list = new ArrayList<String>();
-            String CSV = groupusers;
-                StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
-                while (tokenizer.hasMoreTokens()) {
-                    list.add(tokenizer.nextToken());
-                }
-        return list;
-    } */
+    public List<User> getUsers(String groupUsers) {
+        ArrayList<User> users = new ArrayList<>();
+
+        for(String email: groupUsers.split(",")) {
+            Optional<User> user = userRepository.findByEmail(email);
+            user.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
+
+            users.add(user.get());
+        }
+
+        return users;
+    }
+
+    public Group findById(int id) {
+        return groupRepository.findById(id).orElse(null);
+    }
 }

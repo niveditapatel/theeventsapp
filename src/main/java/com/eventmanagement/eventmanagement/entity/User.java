@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,15 +24,11 @@ public class User {
     private String lastName;
     private String status;
 
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name="user_role",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id"))
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 
-    private List<Role> roles;
-//
 //    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinTable(
 //            name="user_event",
@@ -42,18 +36,6 @@ public class User {
 //            inverseJoinColumns=@JoinColumn(name="event_id"))
 //    private List<Event> events;
 
-    public void addRole(Role role) {
-        roles.add(role);
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles)
-    {
-        this.roles = roles;
-    }
 
     public User(User user) {
         this.status = user.status;
@@ -61,6 +43,6 @@ public class User {
         this.email = user.email;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
-        this.roles = user.roles;
+        this.role = user.role;
     }
 }

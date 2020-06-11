@@ -3,6 +3,7 @@ package com.eventmanagement.eventmanagement.service;
 import com.eventmanagement.eventmanagement.entity.CustomUserDetails;
 import com.eventmanagement.eventmanagement.entity.User;
 import com.eventmanagement.eventmanagement.repository.UserRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Data
 @Service
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
@@ -21,14 +23,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
      public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
 
-       Optional<User> optionalUser = userRepository.findByEmail(email);
-
-       optionalUser.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
+        optionalUser.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
 
         // For debugging purpose
-         System.out.println(optionalUser.toString());
-
-      return optionalUser.map(CustomUserDetails::new).get();
+        System.out.println(optionalUser.toString());
+        return optionalUser.map(CustomUserDetails::new).get();
     }
 }

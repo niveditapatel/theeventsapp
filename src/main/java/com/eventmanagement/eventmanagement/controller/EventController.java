@@ -5,35 +5,36 @@ import com.eventmanagement.eventmanagement.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class EventController {
 
     @Autowired
     private EventService eventService;
 
     @PostMapping("/addEvent")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Event addEvent(@RequestBody Event event) {
         return eventService.saveEvent(event);
     }
 
     @PostMapping("/addEvents")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<Event> addEvents(@RequestBody List<Event> events) {
         return eventService.saveEvents(events);
     }
 
     @GetMapping("/events")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public List<Event> findAllEvents() {
+    public List<Event> findAllEvents(Principal principal) {
+        //Currently Logged-in User
+        System.out.println(principal.toString());
         return eventService.getEvents();
     }
 
     @GetMapping("/eventById/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Event findEventById(@PathVariable int id) {
         return eventService.getEventById(id);
     }
@@ -45,26 +46,21 @@ public class EventController {
     }
 
   /*  @PutMapping("/updateEvent")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Event updateEvent(@RequestBody Event event) {
         return eventService.updateEvent(event);
     }*/
 
     @DeleteMapping("/deleteEvent/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public String deleteEvent(@PathVariable int id) {
         return eventService.deleteEvent(id);
     }
 
-
-    @GetMapping("/geteventdashboard")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getEventDashboard")
     public String findEventDashboard () {
         return eventService.findEventDashboard();
     }
 
-    @GetMapping("/geteventstoday")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getEventsToday")
     public Integer findEventsToday () {
         return eventService.findEventstoday();
     }

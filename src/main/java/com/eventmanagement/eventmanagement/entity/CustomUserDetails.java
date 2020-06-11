@@ -4,8 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -18,13 +18,13 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        System.out.println(user.getRoles());
-//        return null;
+        System.out.println(user.getRole());
 
-        return user.getRoles()
-                .stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
-                .collect(Collectors.toList());
+        if(user.getRole() == null) return null;
+
+        ArrayList<GrantedAuthority> role = new ArrayList<>();
+        role.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().getRole()));
+        return role;
     }
 
     @Override
@@ -54,6 +54,8 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        if(user.getStatus().equals("active"))
+            return true;
+        return false;
     }
 }

@@ -10,12 +10,12 @@ import java.util.List;
 
 @RestController
 public class TestRoutes {
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping("/mufaddal")
-    public List<User> debug() {
-        return userService.getUsers();
-    }
+//    @Autowired
+//    private UserService userService;
+//
+//    @RequestMapping("/mufaddal")
+//    public List<User> debug() {
+//        return userService.getUsers();
+//    }
 
 }
