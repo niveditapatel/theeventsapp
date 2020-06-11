@@ -1,10 +1,12 @@
 package com.eventmanagement.eventmanagement.controller;
 
 import com.eventmanagement.eventmanagement.entity.Event;
+import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -59,8 +61,14 @@ public class EventController {
 
     @GetMapping("/geteventdashboard")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String findEventDashboard () {
+    public List<EventDashboard> findEventDashboard () throws ParseException {
         return eventService.findEventDashboard();
+    }
+
+    @GetMapping("/findEventByHost/{email}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Event> findEventByHost(@PathVariable String email) {
+        return eventService.findEventByHost(email);
     }
 
     @GetMapping("/geteventstoday")

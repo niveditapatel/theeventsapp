@@ -20,7 +20,7 @@ public class Registered {
 
     private String userId;
     private String eventId;
-    private String response;
+
 
 
 }

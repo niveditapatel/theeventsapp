@@ -1,6 +1,5 @@
 package com.eventmanagement.eventmanagement.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,25 +11,19 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "Event_TBL")
-public class Event {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "event_id")
-    private int id;
+
+public class EventDashboard {
+
+
     private String title;
-
     private String email;
     private String description;
-    private String organization;
     private String place;
-    private int duration;
-    private Date startDateTime;
-    private Date endDateTime;
-    private String type;
-    private int maxParticipants;
+    private String startDateTime;
+    private String endDateTime;
+
+
 
 
 }
