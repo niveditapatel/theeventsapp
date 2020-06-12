@@ -67,8 +67,16 @@ public class EventController {
 
     @GetMapping("/findEventByHost/{email}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Event> findEventByHost(@PathVariable String email) {
+    public List<Event> findEventByHost(@PathVariable String email)
+    {
         return eventService.findEventByHost(email);
+    }
+
+    @GetMapping("/findEventByUser/{user_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Event> findEventByUser(@PathVariable String user_id)
+    {
+        return eventService.findEventByUser(user_id);
     }
 
     @GetMapping("/geteventstoday")
@@ -77,4 +85,14 @@ public class EventController {
         return eventService.findEventstoday();
     }
 
+
+
 }
+
+/*    @GetMapping("/findEventByHost/{email}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Event> findEventByHost(@PathVariable String email)
+    {
+        return eventService.findEventByHost(email);
+    */
+

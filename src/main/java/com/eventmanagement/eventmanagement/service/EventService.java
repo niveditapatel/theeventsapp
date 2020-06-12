@@ -4,6 +4,7 @@ import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -72,14 +73,17 @@ public class EventService {
         return eventRepository.findEventstoday();
     }
 
-    public Event updateEvent(Event event) {
-        Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
-        existingEvent.setTitle(event.getTitle());
-        existingEvent.setDescription(event.getDescription());
-        existingEvent.setOrganization(event.getOrganization());
-        return eventRepository.save(existingEvent);
-    }
+  //  public Event updateEvent(Event event) {
+    //    Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
+      //  existingEvent.setTitle(event.getTitle());
+        //existingEvent.setDescription(event.getDescription());
 
+        //return eventRepository.save(existingEvent);
+    //}
 
+  public List<Event> findEventByUser(String user_id)
+    {
+        return eventRepository.findEventByUser (user_id);
+}
 
 }
