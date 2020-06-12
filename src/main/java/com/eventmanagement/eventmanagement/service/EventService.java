@@ -1,16 +1,18 @@
 package com.eventmanagement.eventmanagement.service;
 
 import com.eventmanagement.eventmanagement.entity.Event;
+import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EventService {
@@ -30,6 +32,10 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> findEventByHost(String email) {
+        return eventRepository.findEventByHost(email);
+    }
+
     public Event getEventById(int id) {
         return eventRepository.findById(id).orElse(null);
     }
@@ -43,12 +49,41 @@ public class EventService {
         return "Event Removed";
     }
 
-    public Event updateEvent(Event event) {
-        Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
-        existingEvent.setTitle(event.getTitle());
-        existingEvent.setDescription(event.getDescription());
-        existingEvent.setOrganization(event.getOrganization());
-        return eventRepository.save(existingEvent);
+    public List<EventDashboard> findEventDashboard() throws ParseException {
+
+         List<String> dashboard =  eventRepository.findEventDashboard();
+         List<EventDashboard> eventDashboardList= new ArrayList<EventDashboard>();
+         for (String event: dashboard)
+         {
+             EventDashboard eventDashboard= new EventDashboard();
+             String[] data= event.split(",");
+    eventDashboard.setTitle(data[0]);
+             eventDashboard.setPlace(data[1]);
+            eventDashboard.setStartDateTime(data[2]);
+             eventDashboard.setEndDateTime(data[3]);
+             eventDashboard.setEmail(data[4]);
+             eventDashboard.setDescription(data[5]);
+            eventDashboardList.add(eventDashboard);
+
+         }
+         return eventDashboardList;
     }
+
+    public Integer findEventstoday() {
+        return eventRepository.findEventstoday();
+    }
+
+  //  public Event updateEvent(Event event) {
+    //    Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
+      //  existingEvent.setTitle(event.getTitle());
+        //existingEvent.setDescription(event.getDescription());
+
+        //return eventRepository.save(existingEvent);
+    //}
+
+  public List<Event> findEventByUser(String user_id)
+    {
+        return eventRepository.findEventByUser (user_id);
+}
 
 }

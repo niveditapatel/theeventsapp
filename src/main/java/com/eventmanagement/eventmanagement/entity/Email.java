@@ -1,26 +1,28 @@
 package com.eventmanagement.eventmanagement.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
 @Data
-public class Registered {
-
+public class Email {
     @Id
     @GeneratedValue
-    @Column(name = "register_id")
+    @Column(name = "email_id")
     private int id;
 
-    private String userId;
-    private String eventId;
 
-
+        @Column(unique = true)
+        private String email;
 
 }

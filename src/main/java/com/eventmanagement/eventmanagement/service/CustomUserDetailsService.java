@@ -20,15 +20,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<User> optionalUser = userRepository.findByEmail(email);
+       Optional<User> optionalUser = userRepository.findByEmail(email);
 
-        optionalUser.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
+       optionalUser.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
 
         // For debugging purpose
-         System.out.println("sdfsf"+optionalUser.toString());
+       System.out.println("sdfsf"+optionalUser.toString());
 
-        return optionalUser.map(CustomUserDetails::new).get();
+      return optionalUser.map(CustomUserDetails::new).get();
     }
 }

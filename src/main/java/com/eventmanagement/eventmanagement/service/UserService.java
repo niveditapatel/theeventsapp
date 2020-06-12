@@ -1,6 +1,5 @@
 package com.eventmanagement.eventmanagement.service;
 
-import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.entity.User;
 import com.eventmanagement.eventmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

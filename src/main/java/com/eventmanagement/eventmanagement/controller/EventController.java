@@ -1,10 +1,12 @@
 package com.eventmanagement.eventmanagement.controller;
 
 import com.eventmanagement.eventmanagement.entity.Event;
+import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -44,11 +46,11 @@ public class EventController {
         return eventService.getEventByTitle(title);
     }
 
-    @PutMapping("/updateEvent")
+  /*  @PutMapping("/updateEvent")
     @CrossOrigin(origins = "http://localhost:3000")
     public Event updateEvent(@RequestBody Event event) {
         return eventService.updateEvent(event);
-    }
+    }*/
 
     @DeleteMapping("/deleteEvent/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -56,4 +58,41 @@ public class EventController {
         return eventService.deleteEvent(id);
     }
 
+
+    @GetMapping("/geteventdashboard")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<EventDashboard> findEventDashboard () throws ParseException {
+        return eventService.findEventDashboard();
+    }
+
+    @GetMapping("/findEventByHost/{email}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Event> findEventByHost(@PathVariable String email)
+    {
+        return eventService.findEventByHost(email);
+    }
+
+    @GetMapping("/findEventByUser/{user_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Event> findEventByUser(@PathVariable String user_id)
+    {
+        return eventService.findEventByUser(user_id);
+    }
+
+    @GetMapping("/geteventstoday")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Integer findEventsToday () {
+        return eventService.findEventstoday();
+    }
+
+
+
 }
+
+/*    @GetMapping("/findEventByHost/{email}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Event> findEventByHost(@PathVariable String email)
+    {
+        return eventService.findEventByHost(email);
+    */
+
