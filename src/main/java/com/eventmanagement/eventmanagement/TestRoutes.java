@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class HelloWorld {
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping("/mufaddal")
-    public List<User> debug() {
-        return userService.getUsers();
-    }
+public class TestRoutes {
+//    @Autowired
+//    private UserService userService;
+//
+//    @RequestMapping("/mufaddal")
+//    public List<User> debug() {
+//        return userService.getUsers();
+//    }
 
 }

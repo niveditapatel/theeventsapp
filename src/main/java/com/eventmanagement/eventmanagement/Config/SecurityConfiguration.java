@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -46,7 +46,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     // No Encryption for password for Testing
     private PasswordEncoder simplePasswordEncoder() {
-
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence charSequence) {
@@ -58,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 return charSequence.toString().equals(s);
             }
         };
-
     }
 
     @Override
@@ -66,20 +64,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         http.csrf().disable();
-        http.authorizeRequests().anyRequest().permitAll();
-        /*
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 //                .anyRequest().permitAll();
                 .antMatchers("/public/**").permitAll()
                 .antMatchers("/api/deleteEvent/**").hasRole("ADMIN")
                 .antMatchers("/api/addEvent**", "/updateEvent").hasAnyRole("ADMIN", "CREATOR")
-                .antMatchers("/eventByTitle/**","/eventsById/**","/events","/login").authenticated()
+                .antMatchers("/api/eventByTitle/**","/api/eventsById/**","/api/events").hasAnyRole("USER", "ADMIN","CREATOR")
+                .antMatchers("/login").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .httpBasic();
         //Without Any Role Authorization
 //                .antMatchers("/api/**").authenticated()
 //                .anyRequest().permitAll()
 //                .and()
-//                .httpBasic();*/
+//                .httpBasic();
 
     }
 }

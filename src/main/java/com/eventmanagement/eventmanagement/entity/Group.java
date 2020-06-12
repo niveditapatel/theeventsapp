@@ -14,7 +14,7 @@ import java.util.*;
 @Data
 @Entity
 @Table(name = "group_table")
-public class Group<results> {
+public class Group {
 
 
     @Id
@@ -22,36 +22,16 @@ public class Group<results> {
     @Column(name = "group_id")
     private int id;
     @Column(unique = true)
-    private String groupname;
-    private String groupusers;
+    private String groupName;
+    @Column(nullable = false)
+    private String creatorEmail;
 
-
-
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="group_user",
             joinColumns=@JoinColumn(name="group_id"),
             inverseJoinColumns=@JoinColumn(name="user_id"))
+    private List<User> users;
 
-
-    private List <User> users;
-
-
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    public List<User> getUsers() {
-      return users;
-   }
-    public void setEmails(List<User> users)
-    {
-        this.users = users;
-    }
-
-    public Group(Group group) {
-        this.groupname = group.groupname;
-this.users=group.users;
-        this.groupusers=group.groupusers;
-    }
 }
+

@@ -14,7 +14,7 @@ public interface GroupRepository extends JpaRepository<Group,Integer> {
 
 
 
-    List<Group> findByGroupname(String groupname);
+//    List<Group> findByGroupname(String groupname);
 
    // List<Group> getUsersingroup(String groupname);
 //@Query
@@ -31,12 +31,12 @@ public interface GroupRepository extends JpaRepository<Group,Integer> {
      return list;
     }*/
 
-@Query("FROM User WHERE email= ?1")
-    User findByEmail(String email);
-
-
-   @Modifying
-    @Query(value = "insert into group_user (group_id,user_id) VALUES (:gid,:uid)", nativeQuery = true)
-    @Transactional
-    void enterintogroupuser(@Param("gid") Integer gid, @Param("uid") Integer uid);
+//@Query("FROM User WHERE email= ?1")
+//    User findByEmail(String email);
+//
+//
+//   @Modifying
+//    @Query(value = "insert into group_user (group_id,user_id) VALUES (:gid,:uid)", nativeQuery = true)
+//    @Transactional
+//    void enterintogroupuser(@Param("gid") Integer gid, @Param("uid") Integer uid);
 }
