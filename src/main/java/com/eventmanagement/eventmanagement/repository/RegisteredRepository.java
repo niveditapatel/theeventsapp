@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface RegisteredRepository extends JpaRepository<Registered, Integer> {
 
-
-
     List<Registered> findByUserId(int userId);
 
 }

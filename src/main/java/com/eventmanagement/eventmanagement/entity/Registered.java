@@ -26,5 +26,4 @@ public class Registered {
     private String response;
 
 
-
 }

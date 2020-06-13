@@ -18,14 +18,24 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/getUser")
-    public List<User> debug() {
+    public List<User> getUser() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/getEmails")
+    public List<String> getEmails() {
+        return userService.getEmails();
     }
 
     @PostMapping("/addUser")
     public User addUser(@RequestBody User user) {
         System.out.println(user);
         return userService.saveUser(user);
+    }
+
+    @GetMapping("/userByEmail/{email}")
+    public User findByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
     }
 
 }

@@ -86,15 +86,6 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
-//    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name="user_event",
-//            joinColumns=@JoinColumn(name="user_id"),
-//            inverseJoinColumns=@JoinColumn(name="event_id"))
-//    private List<Event> events;
-
-
     public User(User user) {
         this.status = user.status;
         this.password = user.password;

@@ -1,7 +1,8 @@
 package com.eventmanagement.eventmanagement.controller;
 import com.eventmanagement.eventmanagement.entity.User;
-import com.eventmanagement.eventmanagement.service.GroupService;
+
 import com.eventmanagement.eventmanagement.service.NotificationService;
+import com.eventmanagement.eventmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @Autowired
-    private GroupService groupService;
+    private UserService userService;
 
     @RequestMapping("/signup")
     public String signup ()
@@ -27,7 +28,7 @@ public class NotificationController {
     public String signupsuccess () {
 
 
-        User user= groupService.findByEmail("17bce084@nirmauni.ac.in");
+        User user= userService.getUserByEmail("17bce084@nirmauni.ac.in");
 
         try {
             notificationService.sendNotification(user);
