@@ -26,6 +26,7 @@ public class GroupService {
         group.setCreatorEmail(groupReceiver.getCreatorEmail());
 
         return groupRepository.save(group);
+
     }
 
     public List<Group> saveGroups(List<Group> groups) {
@@ -43,8 +44,8 @@ public class GroupService {
     }
 
     public User findByEmail(String email) {
-        return null;
-//        return groupRepository.findByEmail(email);
+
+     return groupRepository.findByEmail(email);
     }
 
     public void enterIntoGroupUser(Integer gid, Integer uid) {

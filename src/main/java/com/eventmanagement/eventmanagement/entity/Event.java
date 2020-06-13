@@ -34,7 +34,6 @@ public class Event {
     private int maxParticipants;
 
 
-<<<<<<< HEAD
     @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name="event_user",
@@ -69,8 +68,5 @@ public class Event {
 
 
     }
-=======
 
-
->>>>>>> a986aa44cfa07b291dd02d9fa7bc0cf6900ab7d2
 }

@@ -31,8 +31,8 @@ public interface GroupRepository extends JpaRepository<Group,Integer> {
      return list;
     }*/
 
-//@Query("FROM User WHERE email= ?1")
-//    User findByEmail(String email);
+@Query("FROM User WHERE email= ?1")
+    User findByEmail(String email);
 //
 //
 //   @Modifying
