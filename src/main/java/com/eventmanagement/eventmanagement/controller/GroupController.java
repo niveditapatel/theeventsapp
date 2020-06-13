@@ -38,25 +38,6 @@ public class GroupController {
         return groupService.groupNames();
     }
 
-
-//    @PostMapping("/enterIntoGroupUser/{gid}/{uid}")
-//  @CrossOrigin(origins = "http://localhost:3000")
-//    public void enterIntoGroupUser(@PathVariable Integer gid, @PathVariable Integer uid) {
-//         groupService.enterintogroupuser(gid,uid);
-//    }
-
-    @GetMapping("/userByEmail/{email}")
-    public User findByEmail(@PathVariable String email) {
-        return groupService.findByEmail(email);
-    }
-
-
-
-  /*  @GetMapping("/getusersfromstring/{groupusers}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ArrayList<String> getEmails(String groupusers) {
-        return groupService.getEmails(groupusers);
-    } */
 }
 
 

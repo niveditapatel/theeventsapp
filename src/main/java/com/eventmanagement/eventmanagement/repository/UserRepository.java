@@ -15,6 +15,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT email FROM user", nativeQuery = true)
     List<String> getEmail();
 
-
-    //User findbyEmail(String nextToken);
 }

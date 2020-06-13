@@ -20,13 +20,10 @@ public class RegisteredService {
 
     @Autowired
     RegisteredRepository registeredRepository;
-
     @Autowired
     EventRepository eventRepository;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     GroupRepository groupRepository;
 

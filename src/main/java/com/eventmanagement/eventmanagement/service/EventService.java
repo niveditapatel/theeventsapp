@@ -68,7 +68,6 @@ public class EventService {
         return eventRepository.findEventsToday();
     }
 
-
     public List<EventSender> findEventByUser(int user_id) {
         List<Event> events = eventRepository.findEventByUser(user_id);
         List<EventSender> eventSenders = new ArrayList<>();

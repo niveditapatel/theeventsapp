@@ -32,23 +32,8 @@ public class GroupService {
         return groupRepository.saveAll(groups);
     }
 
-
     public List<Group> getGroups() {
         return groupRepository.findAll();
-    }
-
-    public List<Group> getUsersInGroup(String groupName) {
-//        return groupRepository.findByGroupname(groupname);
-        return null;
-    }
-
-    public User findByEmail(String email) {
-        return null;
-//        return groupRepository.findByEmail(email);
-    }
-
-    public void enterIntoGroupUser(Integer gid, Integer uid) {
-//        groupRepository.enterintogroupuser(gid, uid);
     }
 
     public List<User> getUsers(String groupUsers) {
