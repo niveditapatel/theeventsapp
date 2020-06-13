@@ -9,34 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GroupRepository extends JpaRepository<Group,Integer> {
+    Optional<Group> findByGroupName(String groupName);
 
+    @Query(value = "SELECT group_name FROM group_table", nativeQuery = true)
+    List<String> getGroupName();
 
-
-//    List<Group> findByGroupname(String groupname);
-
-   // List<Group> getUsersingroup(String groupname);
-//@Query
-
-  // ArrayList<String> getEmails(String groupusers);
-
- /*ArrayList<String> getEmails(String groupusers)
-    {    ArrayList<String> list = new ArrayList<String>();
-          String CSV = groupusers;
-            StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
-          while (tokenizer.hasMoreTokens()) {
-            list.add(tokenizer.nextToken());
-     }
-     return list;
-    }*/
-
-//@Query("FROM User WHERE email= ?1")
-//    User findByEmail(String email);
-//
-//
-//   @Modifying
-//    @Query(value = "insert into group_user (group_id,user_id) VALUES (:gid,:uid)", nativeQuery = true)
-//    @Transactional
-//    void enterintogroupuser(@Param("gid") Integer gid, @Param("uid") Integer uid);
 }
