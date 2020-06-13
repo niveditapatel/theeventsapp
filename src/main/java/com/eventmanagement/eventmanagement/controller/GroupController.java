@@ -33,6 +33,11 @@ public class GroupController {
         return groupService.getGroups();
     }
 
+    @GetMapping("/getGroupNames")
+    public List<String> groupNames() {
+        return groupService.groupNames();
+    }
+
 
 //    @PostMapping("/enterIntoGroupUser/{gid}/{uid}")
 //  @CrossOrigin(origins = "http://localhost:3000")

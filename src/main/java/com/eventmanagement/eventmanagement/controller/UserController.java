@@ -18,8 +18,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/getUser")
-    public List<User> debug() {
+    public List<User> getUser() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/getEmails")
+    public List<String> getEmails() {
+        return userService.getEmails();
     }
 
     @PostMapping("/addUser")

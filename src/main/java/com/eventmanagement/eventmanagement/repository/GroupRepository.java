@@ -14,6 +14,9 @@ import java.util.Optional;
 public interface GroupRepository extends JpaRepository<Group,Integer> {
     Optional<Group> findByGroupName(String groupName);
 
+    @Query(value = "SELECT group_name FROM group_table", nativeQuery = true)
+    List<String> getGroupName();
+
 
 //    List<Group> findByGroupname(String groupname);
 
