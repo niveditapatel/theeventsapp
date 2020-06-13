@@ -18,17 +18,10 @@ public class Registered {
     @Column(name = "register_id")
     private int id;
 
-<<<<<<< HEAD
-    private String userId;
-    private String eventId;
-
-=======
-    @Column(name = "userid")
+    @Column(name = "user_id")
     private int userId;
-    @Column(name = "eventid")
+    @Column(name = "event_id")
     private int eventId;
     private String response;
->>>>>>> a986aa44cfa07b291dd02d9fa7bc0cf6900ab7d2
-
 
 }
