@@ -6,6 +6,7 @@ import com.eventmanagement.eventmanagement.repository.GroupRepository;
 import com.eventmanagement.eventmanagement.repository.RegisteredRepository;
 import com.eventmanagement.eventmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,9 +16,6 @@ import java.util.Optional;
 @Service
 public class RegisteredService {
 
-    private String SUCCESS = "success";
-    private String FAILED = "failed";
-
     @Autowired
     RegisteredRepository registeredRepository;
     @Autowired
@@ -26,6 +24,10 @@ public class RegisteredService {
     UserRepository userRepository;
     @Autowired
     GroupRepository groupRepository;
+    @Autowired
+    NotificationService notificationService;
+    private final String SUCCESS = "success";
+    private final String FAILED = "failed";
 
     public String addEvent(EventReceiver eventReceiver) {
 
@@ -41,12 +43,12 @@ public class RegisteredService {
 
         event = eventRepository.save(event);
 
-        if(eventReceiver.getTarget().equals("public")) {
+        if (eventReceiver.getTarget().equals("public")) {
             return addPublicEvent(event);
-        } else if(eventReceiver.getTarget().equals("group")) {
+        } else if (eventReceiver.getTarget().equals("group")) {
             return addGroupEvent(eventReceiver.getAction(), event);
-        } else if(eventReceiver.getTarget().equals("emails")) {
-            return addEmailsEvent(eventReceiver.getAction().split(","),event);
+        } else if (eventReceiver.getTarget().equals("emails")) {
+            return addEmailsEvent(eventReceiver.getAction().split(","), event);
         }
 
         eventRepository.deleteById(event.getId());
@@ -55,43 +57,59 @@ public class RegisteredService {
 
     private String addEmailsEvent(String[] emails, Event event) {
         List<User> users = new ArrayList<>();
-        for(String email:emails) {
+        for (String email : emails) {
             Optional<User> optionalUser = userRepository.findByEmail(email);
-            if(!optionalUser.isPresent()) {
+            if (!optionalUser.isPresent()) {
                 eventRepository.deleteById(event.getId());
                 return FAILED;
             }
             users.add(optionalUser.get());
         }
 
-        for(User user:users) {
-            if(!user.getEmail().equals(event.getEmail())) {
-                Registered registered = new Registered();
-                registered.setResponse("accept");
-                registered.setEventId(event.getId());
-                registered.setUserId(user.getId());
-            }
-        }
-
+        getString(event, users);
         return SUCCESS;
     }
 
     private String addGroupEvent(String groupName, Event event) {
 
         Optional<Group> optionalGroup = groupRepository.findByGroupName(groupName);
-        if(!optionalGroup.isPresent()) {
+        if (!optionalGroup.isPresent()) {
             eventRepository.deleteById(event.getId());
             return FAILED;
         }
         List<User> users = optionalGroup.get().getUsers();
 
-        for(User user:users) {
-            if(!user.getEmail().equals(event.getEmail())) {
+        return getString(event, users);
+    }
+
+    private String getString(Event event, List<User> users) {
+        for (User user : users) {
+            if(!user.getStatus().equals("active"))
+            {
+                return FAILED;
+            }
+            if (!user.getEmail().equals(event.getEmail())) {
+                String email = user.getEmail();
+                String subject = "New Event: " + event.getTitle();
+
+                String text = "Hi " + user.getFirstName() + ",\n" +
+                        "You have been invited to the following event:\n" +
+                        event.getTitle() + "\n" +
+                        event.getDescription() + "\n Starting On:" +
+                        event.getStartDateTime() + " to " + event.getEndDateTime() +
+                        "\n at: " +
+                        event.getPlace() + "\n" + "Hosted By:"
+                        + event.getEmail();
                 Registered registered = new Registered();
-                registered.setUserId(user.getId());
-                registered.setEventId(event.getId());
                 registered.setResponse("accept");
-                registeredRepository.save(registered);
+                registered.setEventId(event.getId());
+                registered.setUserId(user.getId());
+                //send email to each user;
+                try {
+                    notificationService.sendNotification(email, subject, text);
+                } catch (MailException e) {
+                    System.out.println("mail not sent " + e);
+                }
             }
         }
 
@@ -102,16 +120,6 @@ public class RegisteredService {
 
         List<User> users = userRepository.findAll();
 
-        for(User user:users) {
-            if(!user.getEmail().equals(event.getEmail())) {
-                Registered registered = new Registered();
-                registered.setUserId(user.getId());
-                registered.setEventId(event.getId());
-                registered.setResponse("accept");
-                registeredRepository.save(registered);
-            }
-        }
-
-        return SUCCESS;
+        return getString(event, users);
     }
 }

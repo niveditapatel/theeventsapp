@@ -35,7 +35,7 @@ public class EventController {
     @Autowired
     private RegisteredService registeredService;
 
-    @PostMapping("addEvent")
+    @PostMapping("/addEvent")
     public String addEvent(@RequestBody EventReceiver eventReceiver) {
         return registeredService.addEvent(eventReceiver);
     }

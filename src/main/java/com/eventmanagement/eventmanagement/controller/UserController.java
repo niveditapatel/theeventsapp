@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public User addUser(@RequestBody User user) {
+    public String addUser(@RequestBody User user) {
         System.out.println(user);
         return userService.saveUser(user);
     }
@@ -36,6 +36,12 @@ public class UserController {
     @GetMapping("/userByEmail/{email}")
     public User findByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
+    }
+
+    @GetMapping("/verify/{unique_code}")
+    public String verify(@PathVariable String unique_code)
+    {
+        return userService.verify(unique_code);
     }
 
 }
