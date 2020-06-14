@@ -1,11 +1,10 @@
 package com.eventmanagement.eventmanagement.service;
 
-import com.eventmanagement.eventmanagement.entity.Group;
-import com.eventmanagement.eventmanagement.entity.GroupReceiver;
-import com.eventmanagement.eventmanagement.entity.User;
+import com.eventmanagement.eventmanagement.entity.*;
 import com.eventmanagement.eventmanagement.repository.GroupRepository;
 import com.eventmanagement.eventmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +16,26 @@ public class GroupService {
     private GroupRepository groupRepository;
 
     @Autowired
+    private NotificationService notificationService;
+
+    @Autowired
     private UserRepository userRepository;
 
-    public Group saveGroup(GroupReceiver groupReceiver) {
+    public String saveGroup(GroupReceiver groupReceiver) {
         Group group = new Group();
         group.setGroupName(groupReceiver.getName());
-        group.setUsers(getUsers(groupReceiver.getEmail()));
+        List<User> users = getUsers(groupReceiver.getEmail());
+        if(users==null)
+        {
+            return "failed";
+        }
+        getString(group, users);
+        group.setUsers(users);
         group.setCreatorEmail(groupReceiver.getCreatorEmail());
 
-        return groupRepository.save(group);
+        groupRepository.save(group);
+        return "success";
+
     }
 
     public List<Group> saveGroups(List<Group> groups) {
@@ -36,13 +46,21 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
+
     public List<User> getUsers(String groupUsers) {
         ArrayList<User> users = new ArrayList<>();
 
-        for(String email: groupUsers.split(",")) {
-            Optional<User> user = userRepository.findByEmail(email);
-            user.orElseThrow(() ->  new UsernameNotFoundException("User is invalid"));
+        for (String email : groupUsers.split(",")) {
 
+            Optional<User> user = userRepository.findByEmail(email);
+            if (!user.isPresent())
+            {
+                return null;
+            }
+            if(!user.get().getStatus().equals("active"))
+            {
+                return null;
+            }
             users.add(user.get());
         }
 
@@ -55,5 +73,26 @@ public class GroupService {
 
     public List<String> groupNames() {
         return groupRepository.getGroupName();
+    }
+
+
+    private void getString(Group group, List<User> users) {
+        for (User user : users) {
+
+            String email = user.getEmail();
+            String subject = "New Group: " + group.getGroupName();
+
+            String text = "Hi " + user.getFirstName() + ",\n" +
+                    "You have been added to the following group:\n" +
+                    group.getGroupName() + "\n" +
+                    "Created By:" + group.getCreatorEmail();
+
+            try {
+                notificationService.sendNotification(email, subject, text);
+            } catch (MailException e) {
+                System.out.println("mail not sent " + e);
+            }
+        }
+
     }
 }

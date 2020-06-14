@@ -24,6 +24,11 @@ public class User {
     private String lastName;
     private String status;
 
+
+    public String getEmail() {
+        return email;
+    }
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

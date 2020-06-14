@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.*;
 
 public class Main {
+
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -15,7 +16,7 @@ public class Main {
     @Value("${app.title}")
     private String url;
     public static void main(String[] args) {
-        // System.out.println(passwordEncoder().encode("niv"));
+
 
         System.out.println(UUID.randomUUID());
         Main ma = new Main();
@@ -29,9 +30,3 @@ public class Main {
 
 }
 
-/*
-Users
-mufaddal.naya@gmail.com  -> hello    -> Admin
-mmm@gmail.com            -> mmn      -> Creator
-mmn_new@gmail.com        -> mmn_new  -> User
- */

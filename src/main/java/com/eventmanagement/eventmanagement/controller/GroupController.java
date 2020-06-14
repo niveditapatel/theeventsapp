@@ -19,7 +19,7 @@ public class GroupController {
     private GroupService groupService;
 
     @PostMapping("/addGroup")
-    public Group saveGroup(@RequestBody GroupReceiver groupReceiver) {
+    public String saveGroup(@RequestBody GroupReceiver groupReceiver) {
         return groupService.saveGroup(groupReceiver);
     }
 

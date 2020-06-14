@@ -1,16 +1,25 @@
 package com.eventmanagement.eventmanagement.controller;
 
 import com.eventmanagement.eventmanagement.entity.Event;
+
+
 import com.eventmanagement.eventmanagement.entity.EventDashboard;
-import com.eventmanagement.eventmanagement.entity.EventReceiver;
+
 import com.eventmanagement.eventmanagement.entity.EventSender;
+
+
+
+import com.eventmanagement.eventmanagement.entity.EventReceiver;
+
 import com.eventmanagement.eventmanagement.service.EventService;
 import com.eventmanagement.eventmanagement.service.RegisteredService;
-import com.eventmanagement.eventmanagement.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+
+
 import java.security.Principal;
 import java.util.List;
 
@@ -66,8 +75,10 @@ public class EventController {
         return eventService.findEventByHost(email);
     }
 
+
     @GetMapping("/getEventsToday")
     @CrossOrigin(origins = "http://localhost:3000")
+
     public Integer findEventsToday () {
         return eventService.findEventsToday();
     }
