@@ -26,7 +26,7 @@ public class EventController {
     @Autowired
     private RegisteredService registeredService;
 
-    @PostMapping("addEvent")
+    @PostMapping("/addEvent")
     public String addEvent(@RequestBody EventReceiver eventReceiver) {
         return registeredService.addEvent(eventReceiver);
     }
@@ -46,12 +46,6 @@ public class EventController {
     @GetMapping("/eventById/{id}")
     public Event findEventById(@PathVariable int id) {
         return eventService.getEventById(id);
-    }
-
-    @GetMapping("/eventByTitle/{title}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public Event findEventByTitle(@PathVariable String title) {
-        return eventService.getEventByTitle(title);
     }
 
     @DeleteMapping("/deleteEvent/{id}")
@@ -76,6 +70,21 @@ public class EventController {
     @CrossOrigin(origins = "http://localhost:3000")
     public Integer findEventsToday () {
         return eventService.findEventsToday();
+    }
+
+    @GetMapping("/getPendingEvents/{user_id}")
+    public List<Event> getPendingEvents(@PathVariable int user_id) {
+        return eventService.getPendingEvents(user_id);
+    }
+
+    @PostMapping("/accept/{user_id}/{event_id}")
+    public void accept(@PathVariable int user_id, @PathVariable int event_id) {
+         registeredService.accept(user_id, event_id);
+    }
+
+    @PostMapping("reject/{user_id}/{event_id}")
+    public void reject(@PathVariable int user_id, @PathVariable int event_id) {
+         registeredService.reject(user_id, event_id);
     }
 
 }

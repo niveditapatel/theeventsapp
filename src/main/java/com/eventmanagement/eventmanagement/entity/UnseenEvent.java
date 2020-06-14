@@ -11,16 +11,14 @@ import javax.persistence.*;
 @Entity
 @Table
 @Data
-public class Registered {
+public class UnseenEvent {
 
     @Id
     @GeneratedValue
-    @Column(name = "register_id")
     private int id;
     @Column(name = "user_id")
     private int userId;
     @Column(name = "event_id")
     private int eventId;
-    private String response;
 
 }

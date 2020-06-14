@@ -78,4 +78,7 @@ public class EventService {
         return eventSenders;
     }
 
+    public List<Event> getPendingEvents(int user_id) {
+        return eventRepository.findPendingResponse(user_id);
+    }
 }

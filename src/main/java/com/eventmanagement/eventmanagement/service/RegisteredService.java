@@ -1,14 +1,12 @@
 package com.eventmanagement.eventmanagement.service;
 
 import com.eventmanagement.eventmanagement.entity.*;
-import com.eventmanagement.eventmanagement.repository.EventRepository;
-import com.eventmanagement.eventmanagement.repository.GroupRepository;
-import com.eventmanagement.eventmanagement.repository.RegisteredRepository;
-import com.eventmanagement.eventmanagement.repository.UserRepository;
+import com.eventmanagement.eventmanagement.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +24,10 @@ public class RegisteredService {
     UserRepository userRepository;
     @Autowired
     GroupRepository groupRepository;
+
+    @Autowired
+    UnseenEventRepository unseenEventRepository;
+
 
     public String addEvent(EventReceiver eventReceiver) {
 
@@ -54,6 +56,8 @@ public class RegisteredService {
     }
 
     private String addEmailsEvent(String[] emails, Event event) {
+        System.out.println(Arrays.toString(emails));
+        System.out.println(event);
         List<User> users = new ArrayList<>();
         for(String email:emails) {
             Optional<User> optionalUser = userRepository.findByEmail(email);
@@ -66,10 +70,15 @@ public class RegisteredService {
 
         for(User user:users) {
             if(!user.getEmail().equals(event.getEmail())) {
+                UnseenEvent unseenEvent = new UnseenEvent();
+                unseenEvent.setUserId(user.getId());
+                unseenEvent.setEventId(event.getId());
+                unseenEventRepository.save(unseenEvent);
                 Registered registered = new Registered();
-                registered.setResponse("accept");
+                registered.setResponse("pending");
                 registered.setEventId(event.getId());
                 registered.setUserId(user.getId());
+                registeredRepository.save(registered);
             }
         }
 
@@ -87,10 +96,14 @@ public class RegisteredService {
 
         for(User user:users) {
             if(!user.getEmail().equals(event.getEmail())) {
+                UnseenEvent unseenEvent = new UnseenEvent();
+                unseenEvent.setUserId(user.getId());
+                unseenEvent.setEventId(event.getId());
+                unseenEventRepository.save(unseenEvent);
                 Registered registered = new Registered();
                 registered.setUserId(user.getId());
                 registered.setEventId(event.getId());
-                registered.setResponse("accept");
+                registered.setResponse("pending");
                 registeredRepository.save(registered);
             }
         }
@@ -104,14 +117,35 @@ public class RegisteredService {
 
         for(User user:users) {
             if(!user.getEmail().equals(event.getEmail())) {
+                UnseenEvent unseenEvent = new UnseenEvent();
+                unseenEvent.setUserId(user.getId());
+                unseenEvent.setEventId(event.getId());
+                unseenEventRepository.save(unseenEvent);
                 Registered registered = new Registered();
                 registered.setUserId(user.getId());
                 registered.setEventId(event.getId());
-                registered.setResponse("accept");
+                registered.setResponse("pending");
                 registeredRepository.save(registered);
             }
         }
 
         return SUCCESS;
     }
+
+    public void accept(int user_id, int event_id) {
+        Optional<Registered> optionalRegistered = registeredRepository.get(user_id, event_id);
+        if(!optionalRegistered.isPresent()) return;
+        Registered registered = optionalRegistered.get();
+        registered.setResponse("accept");
+        registeredRepository.save(registered);
+    }
+
+    public void reject(int user_id, int event_id) {
+        Optional<Registered> optionalRegistered = registeredRepository.get(user_id, event_id);
+        if(!optionalRegistered.isPresent()) return;
+        Registered registered = optionalRegistered.get();
+        registered.setResponse("reject");
+        registeredRepository.save(registered);
+    }
+
 }

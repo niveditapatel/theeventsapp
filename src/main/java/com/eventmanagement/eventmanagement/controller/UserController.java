@@ -6,6 +6,7 @@ import com.eventmanagement.eventmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,11 @@ public class UserController {
     @GetMapping("/userByEmail/{email}")
     public User findByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
+    }
+
+    @GetMapping("/curUser")
+    public String curUser(Principal principal) {
+        return principal.getName();
     }
 
 }

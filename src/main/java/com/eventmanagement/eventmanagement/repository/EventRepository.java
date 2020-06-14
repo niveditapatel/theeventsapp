@@ -20,8 +20,15 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     @Query(value = "select count(*) from event where start_date_time=(select curdate())", nativeQuery = true)
     Integer findEventsToday();
 
-    @Query(value = "(select * from event where event_id=(select event_id FROM registered where user_id= :user_id and response='accept'))",nativeQuery = true)
+    @Query(value = "(select * from event where event_id IN (select event_id FROM registered where user_id= :user_id and response='accept'))",nativeQuery = true)
     List<Event> findEventByUser (@Param("user_id")  int user_id);
 
+    @Query(value = "(select * from event where event_id IN(select event_id FROM unseen_event where user_id= :user_id))", nativeQuery = true)
+    List<Event> alerts(@Param("user_id") int user_id);
 
+    @Query(value = "(select * from event where start_date_time between now() and date_add(now(), INTERVAL 15 MINUTE) and event_id IN (select event_id FROM registered where user_id= :user_id and response='accept'))", nativeQuery = true)
+    List<Event> alertsEventIn15Min(@Param("user_id")  int user_id);
+
+    @Query(value = "(select * from event where event_id IN (select event_id FROM registered where user_id= :user_id and response='pending'))", nativeQuery = true)
+    List<Event> findPendingResponse(@Param("user_id") int user_id);
 }
