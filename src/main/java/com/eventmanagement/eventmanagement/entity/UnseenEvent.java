@@ -1,6 +1,5 @@
 package com.eventmanagement.eventmanagement.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,14 +11,14 @@ import javax.persistence.*;
 @Entity
 @Table
 @Data
-public class Email {
+public class UnseenEvent {
+
     @Id
     @GeneratedValue
-    @Column(name = "email_id")
     private int id;
-
-
-        @Column(unique = true)
-        private String email;
+    @Column(name = "user_id")
+    private int userId;
+    @Column(name = "event_id")
+    private int eventId;
 
 }

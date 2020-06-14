@@ -1,53 +1,37 @@
 package com.eventmanagement.eventmanagement;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-
-    public int add(int a, int b) {
-        return a+b;
-    }
-
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    @Value("${app.title}")
+    private String url;
     public static void main(String[] args) {
+        // System.out.println(passwordEncoder().encode("niv"));
 
+        System.out.println(UUID.randomUUID());
+        Main ma = new Main();
+        ma.solve();
+        System.out.println("");
+    }
 
-
-     //  System.out.println(passwordEncoder().encode("niv"));
-
-
-        String groupusers = "abc@gmail.com,nivedita@icloud,abc@abd.com";
-        ArrayList<String> list = new ArrayList<String>();
-            String CSV = groupusers;
-                StringTokenizer tokenizer = new StringTokenizer(CSV, ",");
-                while (tokenizer.hasMoreTokens()) {
-                    list.add(tokenizer.nextToken());
-                }
-        list.forEach(System.out::println);
-
-
-
-
+    private void solve() {
+        System.out.println(url);
     }
 
 }
 
 /*
-
 Users
-
 mufaddal.naya@gmail.com  -> hello    -> Admin
 mmm@gmail.com            -> mmn      -> Creator
-mmn_new@gmail.com        -> mmn_new  ->User
-
+mmn_new@gmail.com        -> mmn_new  -> User
  */

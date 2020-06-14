@@ -16,7 +16,6 @@ import java.util.*;
 @Table(name = "group_table")
 public class Group {
 
-
     @Id
     @GeneratedValue
     @Column(name = "group_id")
