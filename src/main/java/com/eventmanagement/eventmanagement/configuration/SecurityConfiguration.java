@@ -1,4 +1,4 @@
-package com.eventmanagement.eventmanagement.Config;
+package com.eventmanagement.eventmanagement.configuration;
 
 
 import com.eventmanagement.eventmanagement.repository.UserRepository;
