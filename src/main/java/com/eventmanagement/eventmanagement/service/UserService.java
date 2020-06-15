@@ -51,7 +51,7 @@ public class UserService {
 
         String text = "Hi " + user.getFirstName() + ",\n" +
                 "You need to verify your Account for Events Application:\n"
-                +"Verification Link:\n"+"http://localhost:3000/verify/"+unique_id;
+                +"Verification Link:\n"+"http://localhost:8080/api/verify/"+unique_id;
         try {
             notificationService.sendNotification(email, subject, text);
         } catch (MailException e) {
@@ -84,6 +84,6 @@ public class UserService {
         user.setStatus("active");
         userRepository.save(user);
         verificationCodeRepository.delete(vc.get());
-        return "success";
+        return "<h1>success<h1><br><a href='http://localhost:3000/'>Login</a>";
     }
 }

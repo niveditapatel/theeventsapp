@@ -15,6 +15,8 @@ import java.util.Optional;
 public class RegisteredService {
 
     @Autowired
+    UnseenEventRepository unseenEventRepository;
+    @Autowired
     RegisteredRepository registeredRepository;
     @Autowired
     EventRepository eventRepository;
@@ -24,12 +26,9 @@ public class RegisteredService {
     GroupRepository groupRepository;
     @Autowired
     NotificationService notificationService;
+
     private final String SUCCESS = "success";
     private final String FAILED = "failed";
-
-    @Autowired
-    UnseenEventRepository unseenEventRepository;
-
 
     public String addEvent(EventReceiver eventReceiver) {
 
@@ -69,8 +68,7 @@ public class RegisteredService {
             }
             users.add(optionalUser.get());
         }
-        getString(event, users);
-        return SUCCESS;
+        return getString(event, users);
     }
 
     private String addGroupEvent(String groupName, Event event) {
@@ -85,10 +83,7 @@ public class RegisteredService {
 
     private String getString(Event event, List<User> users) {
         for (User user : users) {
-            if(!user.getStatus().equals("active"))
-            {
-                return FAILED;
-            }
+            System.out.println(user);
             if (!user.getEmail().equals(event.getEmail())) {
                 String email = user.getEmail();
                 String subject = "New Event: " + event.getTitle();
@@ -106,6 +101,11 @@ public class RegisteredService {
                 registered.setEventId(event.getId());
                 registered.setUserId(user.getId());
                 registeredRepository.save(registered);
+
+                UnseenEvent unseenEvent = new UnseenEvent();
+                unseenEvent.setEventId(event.getId());
+                unseenEvent.setUserId(user.getId());
+                unseenEventRepository.save(unseenEvent);
                 //send email to each user;
                 try {
                     notificationService.sendNotification(email, subject, text);
