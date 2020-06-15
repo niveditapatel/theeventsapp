@@ -56,10 +56,10 @@ public class EventController {
         return eventService.deleteEvent(id);
     }
 
-    @GetMapping("/getEventDashboard")
+    @GetMapping("/getEventDashboard/{user_id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<EventDashboard> findEventDashboard () throws ParseException {
-        return eventService.findEventDashboard();
+    public List<EventDashboard> findEventDashboard (@PathVariable int user_id) throws ParseException {
+        return eventService.findEventDashboard(user_id);
     }
 
     @GetMapping("/findEventByHost/{email}")

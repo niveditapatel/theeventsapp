@@ -17,8 +17,8 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     List<Event> findByEmail(String email);
 
-    @Query(value = "select title,place,start_date_time,end_date_time,email,description FROM event", nativeQuery = true)
-    List<String> findEventDashboard();
+    @Query(value = "select title,place,start_date_time,end_date_time,email,description FROM event natural join registered where user_id=:user_id and response='accept'", nativeQuery = true)
+    List<String> findEventDashboard(@Param("user_id") int user_id);
 
     @Query(value = "select count(*) from event where start_date_time=(select curdate())", nativeQuery = true)
     Integer findEventsToday();

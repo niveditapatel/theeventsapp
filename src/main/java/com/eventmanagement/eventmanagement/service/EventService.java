@@ -48,9 +48,9 @@ public class EventService {
         return "Event Removed";
     }
 
-    public List<EventDashboard> findEventDashboard() throws ParseException {
+    public List<EventDashboard> findEventDashboard(int user_id) throws ParseException {
 
-        List<String> dashboard = eventRepository.findEventDashboard();
+        List<String> dashboard = eventRepository.findEventDashboard(user_id);
         List<EventDashboard> eventDashboardList = new ArrayList<EventDashboard>();
         for (String event : dashboard) {
             EventDashboard eventDashboard = new EventDashboard();
