@@ -1,15 +1,7 @@
 package com.eventmanagement.eventmanagement.controller;
 
-import com.eventmanagement.eventmanagement.entity.Event;
+import com.eventmanagement.eventmanagement.entity.*;
 
-
-import com.eventmanagement.eventmanagement.entity.EventDashboard;
-
-import com.eventmanagement.eventmanagement.entity.EventSender;
-
-
-
-import com.eventmanagement.eventmanagement.entity.EventReceiver;
 
 import com.eventmanagement.eventmanagement.service.EventService;
 import com.eventmanagement.eventmanagement.service.RegisteredService;
@@ -21,6 +13,8 @@ import java.text.ParseException;
 
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -96,6 +90,22 @@ public class EventController {
     @PostMapping("reject/{user_id}/{event_id}")
     public void reject(@PathVariable int user_id, @PathVariable int event_id) {
          registeredService.reject(user_id, event_id);
+    }
+
+
+
+    @PostMapping("updateEvent")
+    public void updateEvent(@RequestBody UpdatedEvent updatedEvent){
+
+
+
+        String title= updatedEvent.getTitle();
+        String description= updatedEvent.getDescription();
+        String place= updatedEvent.getPlace();
+        Date startDateTime= updatedEvent.getStartDateTime();
+        Date endDateTime= updatedEvent.getStartDateTime();
+        int event_id= updatedEvent.getEvent_id();
+        eventService.updateEvent(title,description,place,startDateTime,endDateTime,event_id);
     }
 
 }

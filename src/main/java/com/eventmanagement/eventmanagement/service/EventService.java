@@ -5,10 +5,12 @@ import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.entity.EventSender;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -72,7 +74,7 @@ public class EventService {
         List<Event> events = eventRepository.findEventByUser(user_id);
         List<EventSender> eventSenders = new ArrayList<>();
 
-        for(Event event: events) {
+        for (Event event : events) {
             eventSenders.add(new EventSender(event.getTitle(), event.getStartDateTime()));
         }
         return eventSenders;
@@ -81,4 +83,16 @@ public class EventService {
     public List<Event> getPendingEvents(int user_id) {
         return eventRepository.findPendingResponse(user_id);
     }
+
+   public void updateEvent(String title, String description, String place, Date startDateTime, Date endDateTime, int event_id)
+   {
+System.out.println(title);
+       System.out.println(description);
+       System.out.println(place);
+       System.out.println(startDateTime);
+       System.out.println(endDateTime);
+       System.out.println(event_id);
+
+     eventRepository.updateEvent(title,description,place,startDateTime,endDateTime,event_id);
+   }
 }
