@@ -92,12 +92,8 @@ public class EventController {
          registeredService.reject(user_id, event_id);
     }
 
-
-
     @PostMapping("updateEvent")
     public void updateEvent(@RequestBody UpdatedEvent updatedEvent){
-
-
 
         String title= updatedEvent.getTitle();
         String description= updatedEvent.getDescription();
