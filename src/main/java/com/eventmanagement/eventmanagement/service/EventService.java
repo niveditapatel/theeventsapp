@@ -86,13 +86,13 @@ public class EventService {
 
    public void updateEvent(String title, String description, String place, Date startDateTime, Date endDateTime, int event_id)
    {
-System.out.println(title);
-       System.out.println(description);
-       System.out.println(place);
-       System.out.println(startDateTime);
-       System.out.println(endDateTime);
-       System.out.println(event_id);
+        System.out.println(title);
+           System.out.println(description);
+           System.out.println(place);
+           System.out.println(startDateTime);
+           System.out.println(endDateTime);
+           System.out.println(event_id);
 
-     eventRepository.updateEvent(title,description,place,startDateTime,endDateTime,event_id);
+         eventRepository.updateEvent(title,description,place,startDateTime,endDateTime,event_id);
    }
 }
