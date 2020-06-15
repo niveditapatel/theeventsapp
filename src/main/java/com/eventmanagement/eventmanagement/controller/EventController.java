@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class EventController {
 
     @Autowired
@@ -57,13 +57,11 @@ public class EventController {
     }
 
     @GetMapping("/getEventDashboard/{user_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<EventDashboard> findEventDashboard (@PathVariable int user_id) throws ParseException {
         return eventService.findEventDashboard(user_id);
     }
 
     @GetMapping("/findEventByHost/{email}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<Event> findEventByHost(@PathVariable String email)
     {
         return eventService.findEventByHost(email);
@@ -71,8 +69,6 @@ public class EventController {
 
 
     @GetMapping("/getEventsToday")
-    @CrossOrigin(origins = "http://localhost:3000")
-
     public Integer findEventsToday () {
         return eventService.findEventsToday();
     }
