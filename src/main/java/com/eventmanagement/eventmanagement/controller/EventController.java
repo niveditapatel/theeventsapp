@@ -104,8 +104,9 @@ public class EventController {
         String place= updatedEvent.getPlace();
         Date startDateTime= updatedEvent.getStartDateTime();
         Date endDateTime= updatedEvent.getStartDateTime();
+        String type=updatedEvent.getType();
         int event_id= updatedEvent.getEvent_id();
-        eventService.updateEvent(title,description,place,startDateTime,endDateTime,event_id);
+        eventService.updateEvent(title,description,place,type,startDateTime,endDateTime,event_id);
     }
 
 }

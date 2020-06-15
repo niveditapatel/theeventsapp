@@ -84,7 +84,7 @@ public class EventService {
         return eventRepository.findPendingResponse(user_id);
     }
 
-   public void updateEvent(String title, String description, String place, Date startDateTime, Date endDateTime, int event_id)
+   public void updateEvent(String title, String description, String place, String type, Date startDateTime, Date endDateTime, int event_id)
    {
         System.out.println(title);
            System.out.println(description);
@@ -93,6 +93,6 @@ public class EventService {
            System.out.println(endDateTime);
            System.out.println(event_id);
 
-         eventRepository.updateEvent(title,description,place,startDateTime,endDateTime,event_id);
+         eventRepository.updateEvent(title,description,place,type,startDateTime,endDateTime,event_id);
    }
 }

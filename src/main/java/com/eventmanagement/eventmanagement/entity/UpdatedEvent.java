@@ -27,5 +27,5 @@ public class UpdatedEvent {
     private Date startDateTime;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endDateTime;
-
+    private String type;
 }
