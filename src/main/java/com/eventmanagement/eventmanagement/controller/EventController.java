@@ -39,6 +39,11 @@ public class EventController {
         return eventService.findEventByUser(user_id);
     }
 
+    @GetMapping("/eventsForUser/{user_id}")
+    public List<Event> eventsForUser(@PathVariable int user_id) {
+        return eventService.findEventForUser(user_id);
+    }
+
     @GetMapping("/events")
     public List<Event> findAllEvents(Principal principal) {
         //Currently Logged-in User

@@ -13,12 +13,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class EventDashboard {
 
-    private String title;
-    private String email;
-    private String description;
-    private String place;
-    private String startDateTime;
-    private String endDateTime;
+    private String Title;
+    private String Place;
+    private String Start;
+    private String End;
 
 
 }
