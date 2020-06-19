@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     public String addUser(@RequestBody User user) {
-        System.out.println(user);
+        //System.out.println(user);
         return userService.saveUser(user);
     }
 

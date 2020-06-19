@@ -73,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/getGroupById/**","/api/getGroups","/api/getGroupNames").hasAnyRole("USER", "ADMIN","CREATOR")
                 .antMatchers("/api/eventByTitle/**","/api/eventById/**","/api/events").hasAnyRole("USER", "ADMIN","CREATOR")
                 .antMatchers("/api/alertsCountNewEvent/**","/api/alertsNewEvent/**","/api/alertsCountEventIn15Min/**","/api/alertsEventIn15Min/**").hasAnyRole("USER", "ADMIN","CREATOR")
-                .antMatchers("/api/getUser","/api/getEmails","/api/userByEmail/**","/api/curUser","/api/verify/**").hasAnyRole("USER", "ADMIN","CREATOR")
+                .antMatchers("/api/getUser","/api/getEmails","/api/userByEmail/**","/api/curUser").hasAnyRole("USER", "ADMIN","CREATOR")
                 .antMatchers("/login").authenticated()
                 .anyRequest().permitAll()
                 .and()
