@@ -18,5 +18,4 @@ public class EventDashboard {
     private String Start;
     private String End;
 
-
 }

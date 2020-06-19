@@ -62,6 +62,7 @@ public class RegisteredService {
         List<User> users = new ArrayList<>();
         for (String email : emails) {
             Optional<User> optionalUser = userRepository.findByEmail(email);
+            System.out.println(optionalUser);
             if (!optionalUser.isPresent()) {
                 eventRepository.deleteById(event.getId());
                 return FAILED;
@@ -117,7 +118,7 @@ public class RegisteredService {
         return SUCCESS;
     }
 
-    private String addPublicEvent(Event event) {
+    public String addPublicEvent(Event event) {
         List<User> users = userRepository.findAll();
         return getString(event, users);
     }
