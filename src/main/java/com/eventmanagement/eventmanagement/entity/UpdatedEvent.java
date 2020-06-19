@@ -17,8 +17,6 @@ import java.util.List;
 
 public class UpdatedEvent {
 
-
-
     private int event_id;
     private String title;
     private String description;

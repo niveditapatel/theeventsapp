@@ -1,5 +1,6 @@
 package com.eventmanagement.eventmanagement;
 
+import com.eventmanagement.eventmanagement.entity.GroupReceiver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,8 @@ public class Main {
     private String url;
     public static void main(String[] args) {
 
+
+        System.out.println(new GroupReceiver("dsf", "dfs", "asd"));
 
         System.out.println(UUID.randomUUID());
         Main ma = new Main();

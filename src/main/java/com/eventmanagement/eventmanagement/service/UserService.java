@@ -21,6 +21,7 @@ public class UserService {
 
     @Autowired
     private VerificationCodeRepository verificationCodeRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -32,8 +33,9 @@ public class UserService {
     }
 
     public String saveUser(User user) {
+        user.setEmail(user.getEmail().toLowerCase());
         if(userRepository.findByEmail(user.getEmail()).isPresent()) {
-        return "Email already exists";
+            return "Email already exists";
         }
         Role role = new Role();
         role.setId(3);
@@ -71,6 +73,7 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
+        email = email.toLowerCase();
         Optional<User> optionalUser = userRepository.findByEmail(email);
         return optionalUser.orElse(null);
     }

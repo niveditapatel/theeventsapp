@@ -67,7 +67,6 @@ public class EventController {
         return eventService.findEventByHost(email);
     }
 
-
     @GetMapping("/getEventsToday")
     public Integer findEventsToday () {
         return eventService.findEventsToday();

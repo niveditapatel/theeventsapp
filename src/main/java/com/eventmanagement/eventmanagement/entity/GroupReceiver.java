@@ -3,6 +3,7 @@ package com.eventmanagement.eventmanagement.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class GroupReceiver {
     private String name;
     private String creatorEmail;
+    @ToString.Exclude
     private String email;
 
     public String getName() {
