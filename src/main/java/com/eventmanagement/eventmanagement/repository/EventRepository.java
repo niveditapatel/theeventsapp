@@ -26,6 +26,9 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     @Query(value = "(select * from event where event_id IN (select event_id FROM registered where user_id= :user_id and response='accept'))",nativeQuery = true)
     List<Event> findEventByUser (@Param("user_id")  int user_id);
 
+    @Query(value = "(select * from event where event_id IN (select event_id FROM registered where user_id= :user_id and response='accept'))",nativeQuery = true)
+    List<Event> findEventForUser (@Param("user_id")  int user_id);
+
     @Query(value = "(select * from event where event_id IN(select event_id FROM unseen_event where user_id= :user_id))", nativeQuery = true)
     List<Event> alerts(@Param("user_id") int user_id);
 
@@ -38,9 +41,13 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     @Modifying(clearAutomatically = true)
     @Transactional
+<<<<<<< HEAD
     @Query(value = "update event set title=:title, description=:description,place=:place, type=:type,start_date_time=:startDateTime, end_date_time=:endDateTime where event_id=:event_id", nativeQuery = true)
     void updateEvent(@Param("title") String title, @Param("description") String description, @Param("place") String place,@Param("type") String newType, @Param("startDateTime") Date startDateTime, @Param("endDateTime") Date endDateTime, @Param("event_id") int event_id);
-
+=======
+    @Query(value = "update event set title=:title, description=:description,place=:place,type=:type,start_date_time=:startDateTime, end_date_time=:endDateTime where event_id=:event_id", nativeQuery = true)
+    void updateEvent(@Param("title") String title, @Param("description") String description, @Param("place") String place,@Param("type") String type, @Param("startDateTime") Date startDateTime, @Param("endDateTime") Date endDateTime, @Param("event_id") int event_id);
+>>>>>>> a9b7f805ba05c1c815d400d6e3c1e8e1446edb67
 
 
 }

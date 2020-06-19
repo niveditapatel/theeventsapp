@@ -56,11 +56,17 @@ public class EventService {
             EventDashboard eventDashboard = new EventDashboard();
             String[] data = event.split(",");
             eventDashboard.setTitle(data[0]);
+<<<<<<< HEAD
             eventDashboard.setVenue(data[1]);
             eventDashboard.setTime(data[2]);
             //eventDashboard.setEndDateTime(data[3]);
             eventDashboard.setHost(data[4]);
             //eventDashboard.setDescription(data[5]);
+=======
+            eventDashboard.setPlace(data[1]);
+            eventDashboard.setStart(data[2]);
+            eventDashboard.setEnd(data[3]);
+>>>>>>> a9b7f805ba05c1c815d400d6e3c1e8e1446edb67
             eventDashboardList.add(eventDashboard);
         }
         return eventDashboardList;
@@ -95,4 +101,10 @@ public class EventService {
 
          eventRepository.updateEvent(title,description,place,type,startDateTime,endDateTime,event_id);
    }
+
+    public List<Event> findEventForUser(int user_id) {
+       return eventRepository.findEventForUser(user_id);
+
+
+    }
 }

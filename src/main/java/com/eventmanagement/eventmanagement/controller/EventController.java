@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class EventController {
 
     @Autowired
@@ -37,6 +37,11 @@ public class EventController {
     @GetMapping("/eventsByUserId/{user_id}")
     public List<EventSender> eventsByUserId(@PathVariable int user_id) {
         return eventService.findEventByUser(user_id);
+    }
+
+    @GetMapping("/eventsForUser/{user_id}")
+    public List<Event> eventsForUser(@PathVariable int user_id) {
+        return eventService.findEventForUser(user_id);
     }
 
     @GetMapping("/events")
@@ -57,22 +62,17 @@ public class EventController {
     }
 
     @GetMapping("/getEventDashboard/{user_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<EventDashboard> findEventDashboard (@PathVariable int user_id) throws ParseException {
         return eventService.findEventDashboard(user_id);
     }
 
     @GetMapping("/findEventByHost/{email}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<Event> findEventByHost(@PathVariable String email)
     {
         return eventService.findEventByHost(email);
     }
 
-
     @GetMapping("/getEventsToday")
-    @CrossOrigin(origins = "http://localhost:3000")
-
     public Integer findEventsToday () {
         return eventService.findEventsToday();
     }
@@ -92,12 +92,8 @@ public class EventController {
          registeredService.reject(user_id, event_id);
     }
 
-
-
     @PostMapping("updateEvent")
     public void updateEvent(@RequestBody UpdatedEvent updatedEvent){
-
-
 
         String title= updatedEvent.getTitle();
         String description= updatedEvent.getDescription();

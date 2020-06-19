@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UnseenEventController {
 

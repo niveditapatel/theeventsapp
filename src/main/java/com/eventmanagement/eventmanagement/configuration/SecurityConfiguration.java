@@ -1,4 +1,4 @@
-package com.eventmanagement.eventmanagement.Config;
+package com.eventmanagement.eventmanagement.configuration;
 
 
 import com.eventmanagement.eventmanagement.repository.UserRepository;
@@ -63,28 +63,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 //                .anyRequest().permitAll();
                 .antMatchers("/public/**").permitAll()
+
                 .antMatchers("/api/deleteEvent/**").hasAnyRole("ADMIN","CREATOR")
                 .antMatchers("/api/addGroup**").hasAnyRole("ADMIN", "CREATOR")
                 .antMatchers("/api/addEvent**", "/updateEvent**").hasAnyRole("ADMIN", "CREATOR")
                 .antMatchers("/api/getGroupById/**","/api/getGroups","/api/getGroupNames").hasAnyRole("USER", "ADMIN","CREATOR")
                 .antMatchers("/api/eventByTitle/**","/api/eventById/**","/api/events").hasAnyRole("USER", "ADMIN","CREATOR")
                 .antMatchers("/api/alertsCountNewEvent/**","/api/alertsNewEvent/**","/api/alertsCountEventIn15Min/**","/api/alertsEventIn15Min/**").hasAnyRole("USER", "ADMIN","CREATOR")
+                .antMatchers("/api/getUser","/api/getEmails","/api/userByEmail/**","/api/curUser").hasAnyRole("USER", "ADMIN","CREATOR")
                 .antMatchers("/login").authenticated()
-                .antMatchers("/api/getUser","/api/getEmails","/api/addUser","/api/userByEmail/**","/api/curUser","/api/verify/**").hasAnyRole("USER", "ADMIN","CREATOR")
                 .anyRequest().permitAll()
                 .and()
                 .httpBasic()
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .invalidateHttpSession(true)        // set invalidation state when logout
-                .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/403");

@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     public String addUser(@RequestBody User user) {
-        System.out.println(user);
+        //System.out.println(user);
         return userService.saveUser(user);
     }
 
@@ -45,8 +45,7 @@ public class UserController {
     }
 
     @GetMapping("/verify/{unique_code}")
-    public String verify(@PathVariable String unique_code)
-    {
+    public String verify(@PathVariable String unique_code) {
         return userService.verify(unique_code);
     }
 

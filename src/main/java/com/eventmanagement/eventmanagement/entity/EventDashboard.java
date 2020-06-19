@@ -14,6 +14,7 @@ import java.util.Date;
 public class EventDashboard {
 
     private String Title;
+<<<<<<< HEAD
     //event.title
     private String Host;
     //event.hostemail
@@ -21,6 +22,11 @@ public class EventDashboard {
     //event.place
     private String Time;
     //event.startDateTime
+=======
+    private String Place;
+    private String Start;
+    private String End;
+>>>>>>> a9b7f805ba05c1c815d400d6e3c1e8e1446edb67
 
 
 }

@@ -1,4 +1,4 @@
-//package com.eventmanagement.eventmanagement.Config;
+//package com.eventmanagement.eventmanagement.Configuration;
 //
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
