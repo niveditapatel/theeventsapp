@@ -17,7 +17,7 @@ public class NotificationService {
     {
         this.javaMailSender=javaMailSender;
     }
-    public void sendNotification(String email,String subject, String text) throws MailException
+    public String sendNotification(String email,String subject, String text) throws MailException
     {
 
         SimpleMailMessage mail = new SimpleMailMessage();
@@ -26,7 +26,7 @@ public class NotificationService {
         mail.setSubject(subject);
         mail.setText(text);
         javaMailSender.send(mail);
-
+        return "Email Sent";
     }
 
 }

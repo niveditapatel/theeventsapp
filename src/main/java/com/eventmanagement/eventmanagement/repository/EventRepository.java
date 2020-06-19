@@ -17,7 +17,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     List<Event> findByEmail(String email);
 
-    @Query(value = "select title,place,start_date_time,end_date_time,email,description FROM event natural join registered where user_id=:user_id and response='accept'", nativeQuery = true)
+    @Query(value = "select title,place,start_date_time,email FROM event natural join registered where user_id=:user_id and response='accept'", nativeQuery = true)
     List<String> findEventDashboard(@Param("user_id") int user_id);
 
     @Query(value = "select count(*) from event where start_date_time=(select curdate())", nativeQuery = true)
@@ -39,7 +39,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query(value = "update event set title=:title, description=:description,place=:place, type=:type,start_date_time=:startDateTime, end_date_time=:endDateTime where event_id=:event_id", nativeQuery = true)
-    void updateEvent(@Param("title") String title, @Param("description") String description, @Param("place") String place,@Param("type") String type, @Param("startDateTime") Date startDateTime, @Param("endDateTime") Date endDateTime, @Param("event_id") int event_id);
+    void updateEvent(@Param("title") String title, @Param("description") String description, @Param("place") String place,@Param("type") String newType, @Param("startDateTime") Date startDateTime, @Param("endDateTime") Date endDateTime, @Param("event_id") int event_id);
 
 
 

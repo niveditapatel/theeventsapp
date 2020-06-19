@@ -17,4 +17,6 @@ public interface GroupRepository extends JpaRepository<Group,Integer> {
     @Query(value = "SELECT group_name FROM group_table", nativeQuery = true)
     List<String> getGroupName();
 
+    @Query(value = "SELECT group_name FROM group_table natural join group_user where user_id=:user_id", nativeQuery = true)
+    Group findGroupByUser(@Param("user_id") int user_id);
 }

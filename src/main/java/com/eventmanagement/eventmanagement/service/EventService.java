@@ -19,13 +19,13 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public Event saveEvent(Event event) {
-        return eventRepository.save(event);
-    }
+   // public Event saveEvent(Event event) {
+     //   return eventRepository.save(event);
+  //  }
 
-    public List<Event> saveEvents(List<Event> events) {
-        return eventRepository.saveAll(events);
-    }
+   // public List<Event> saveEvents(List<Event> events) {
+     //   return eventRepository.saveAll(events);
+   // }
 
     public List<Event> getEvents() {
         return eventRepository.findAll();
@@ -39,9 +39,9 @@ public class EventService {
         return eventRepository.findById(id).orElse(null);
     }
 
-    public Event getEventByTitle(String title) {
-        return eventRepository.findByTitle(title);
-    }
+    //public Event getEventByTitle(String title) {
+     //   return eventRepository.findByTitle(title);
+    //}
 
     public String deleteEvent(int id) {
         eventRepository.deleteById(id);
@@ -56,11 +56,11 @@ public class EventService {
             EventDashboard eventDashboard = new EventDashboard();
             String[] data = event.split(",");
             eventDashboard.setTitle(data[0]);
-            eventDashboard.setPlace(data[1]);
-            eventDashboard.setStartDateTime(data[2]);
-            eventDashboard.setEndDateTime(data[3]);
-            eventDashboard.setEmail(data[4]);
-            eventDashboard.setDescription(data[5]);
+            eventDashboard.setVenue(data[1]);
+            eventDashboard.setTime(data[2]);
+            //eventDashboard.setEndDateTime(data[3]);
+            eventDashboard.setHost(data[4]);
+            //eventDashboard.setDescription(data[5]);
             eventDashboardList.add(eventDashboard);
         }
         return eventDashboardList;
