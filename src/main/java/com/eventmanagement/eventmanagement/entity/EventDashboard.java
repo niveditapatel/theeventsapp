@@ -14,8 +14,8 @@ import java.util.Date;
 public class EventDashboard {
 
     private String Title;
-    private String Place;
-    private String Start;
-    private String End;
+    private String Host;
+    private String Venue;
+    private String Time;
 
 }

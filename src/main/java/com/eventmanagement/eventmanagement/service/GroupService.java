@@ -38,9 +38,9 @@ public class GroupService {
 
     }
 
-    public List<Group> saveGroups(List<Group> groups) {
-        return groupRepository.saveAll(groups);
-    }
+   // public List<Group> saveGroups(List<Group> groups) {
+     //   return groupRepository.saveAll(groups);
+    //}
 
     public List<Group> getGroups() {
         return groupRepository.findAll();
@@ -94,5 +94,9 @@ public class GroupService {
             }
         }
 
+    }
+
+    public Group findGroupByUser(int user_id) {
+        return groupRepository.findGroupByUser(user_id);
     }
 }
