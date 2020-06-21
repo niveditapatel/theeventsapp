@@ -29,7 +29,7 @@ public class GroupController {
     }
 
     @GetMapping("/getGroupByUser/{user_id}")
-    public Group findGroupByUser(@PathVariable int user_id) {
+    public List<Group> findGroupByUser(@PathVariable int user_id) {
        return groupService.findGroupByUser(user_id);
     }
 
