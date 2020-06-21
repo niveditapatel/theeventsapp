@@ -95,17 +95,11 @@ class EventServiceTest {
     //test again
     @Test
     void findEventDashboard() throws ParseException {
-        List<Event> events = new ArrayList<>();
-        Date startdate = new Date();
-        Date enddate = new Date();
-        events.add(new Event(1, "Meeting", "patelnivedita@icloud.com", "descriptionofmeeting", "place", startdate, enddate, "conference"));
-        events.add(new Event(2, "Meeting2", "patelnivedita@icloud.com", "descriptionofmeeting", "place", startdate, enddate, "conference"));
-        //  List <EventDashboard> eventDashboardList = null;
-        // eventDashboardList.add(new EventDashboard("Meeting","patelnivedita@icloud.com","place", "2020-06-19 00:00:00"));
-        // eventDashboardList.add(new EventDashboard("Meeting2","patelnivedita@icloud.com","place", "2020-06-19 00:00:00"));
-        when(eventRepository.findEventByUser(anyInt())).thenReturn(events);
+        List<String> events = new ArrayList<>();
+        events.add("String 1, string 2, string 3, string 4, string 5");
+        when(eventRepository.findEventDashboard(anyInt())).thenReturn(events);
         List<EventDashboard> result = eventService.findEventDashboard(1);
-        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(1, result.size());
 
     }
 
