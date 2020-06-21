@@ -18,8 +18,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getUser")
-    public List<User> getUser() {
+    @GetMapping("/getUsers")
+    public List<User> getUsers() {
         return userService.getUsers();
     }
 
@@ -30,18 +30,12 @@ public class UserController {
 
     @PostMapping("/addUser")
     public String addUser(@RequestBody User user) {
-        //System.out.println(user);
         return userService.saveUser(user);
     }
 
     @GetMapping("/userByEmail/{email}")
     public User findByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
-    }
-
-    @GetMapping("/curUser")
-    public String curUser(Principal principal) {
-        return principal.getName();
     }
 
     @GetMapping("/verify/{unique_code}")
