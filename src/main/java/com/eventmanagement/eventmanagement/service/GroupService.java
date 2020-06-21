@@ -96,7 +96,7 @@ public class GroupService {
 
     }
 
-    public Group findGroupByUser(int user_id) {
+    public List<Group> findGroupByUser(int user_id) {
         return groupRepository.findGroupByUser(user_id);
     }
 }

@@ -26,4 +26,7 @@ public class UpdatedEvent {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endDateTime;
     private String type;
+
+    public UpdatedEvent(int i, String meeting, String s, String descriptionofmeeting, String place, Date startdate, Date enddate, String conference) {
+    }
 }

@@ -100,11 +100,14 @@ class GroupServiceTest {
         List<User> users = new ArrayList<>();
         users.add(new User(1,"patelnivedita@icloud.com", "sd3edwfsdfdsfsdf", "Niv", "Patel", "active", new Role(1, "ADMIN")));
         users.add(new User(2,"17bce084@nirmauni.ac.in", "dsfv", "Niv", "Patel", "active", new Role(3, "USER")));
-        Group group = new Group(1,"NewGroup", "patelnivedita@icloud.com",users);
-        when(groupRepository.findGroupByUser(anyInt())).thenReturn(group);
-        Group groupDB = groupService.findGroupByUser(1);
+        List<Group> groups = new ArrayList<>();
+        groups.add(new Group(1,"NewGroup1", "patelnivedita@icloud.com",users));
+        groups.add(new Group(2,"NewGroup2", "patelnivedita@icloud.com",users));
+
+        when(groupRepository.findGroupByUser(anyInt())).thenReturn(groups);
+        List<Group> groupDB = groupService.findGroupByUser(1);
         assertNotNull(groupDB);
-        Assertions.assertEquals("NewGroup", groupDB.getGroupName());
+        Assertions.assertEquals(2, groupDB.size());
 
     }
 }

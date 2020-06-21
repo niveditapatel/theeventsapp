@@ -54,6 +54,7 @@ public class Group {
             name="group_user",
             joinColumns=@JoinColumn(name="group_id"),
             inverseJoinColumns=@JoinColumn(name="user_id"))
+
     private List<User> users;
 
 }
