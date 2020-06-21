@@ -52,7 +52,7 @@ class RegisteredServiceTest {
         when(eventRepository.save(any())).thenReturn(event);
         when(registeredRepository.save(any())).thenReturn(new Registered());
         when(unseenEventRepository.save(any())).thenReturn(new UnseenEvent());
-        Mockito.doNothing().when(notificationService).sendNotification(anyString(), anyString(), anyString());
+        when(notificationService.sendNotification(anyString(), anyString(), anyString())).thenReturn("Email Sent");
         Mockito.doNothing().when(eventRepository).deleteById(anyInt());
 
         String result = registeredService.addEvent(eventReceiver);
@@ -65,7 +65,7 @@ class RegisteredServiceTest {
         users.add(new User(1,"nayamufaddal@gmail.com", "sd3edwfsdfdsfsdf", "Mufaddal", "Naya", "active", new Role(1, "ADMIN")));
         when(registeredRepository.save(any())).thenReturn(new Registered());
         when(unseenEventRepository.save(any())).thenReturn(new UnseenEvent());
-        Mockito.doNothing().when(notificationService).sendNotification(anyString(), anyString(), anyString());
+        when(notificationService.sendNotification(anyString(), anyString(), anyString())).thenReturn("Email Sent");
 
         when(userRepository.findAll()).thenReturn(users);
         String result = registeredService.addPublicEvent(new Event());

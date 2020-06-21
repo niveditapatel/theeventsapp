@@ -58,7 +58,7 @@ public class EventService {
             eventDashboard.setTitle(data[0]);
             eventDashboard.setVenue(data[1]);
             eventDashboard.setTime(data[2]);
-            eventDashboard.setHost(data[4]);
+            eventDashboard.setHost(data[3]);
             eventDashboardList.add(eventDashboard);
         }
         return eventDashboardList;

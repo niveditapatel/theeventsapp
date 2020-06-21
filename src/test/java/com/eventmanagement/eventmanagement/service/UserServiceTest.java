@@ -57,7 +57,7 @@ class UserServiceTest {
         assertEquals("Email already exists", result);
         user = new User(1,"nayamufaddal@gmail.com", "sd3edwfsdfdsfsdf", "Mufaddal", "Naya", "active", new Role(1, "ADMIN"));
         when(userRepository.findByEmail("nayamufaddal@gmail.com")).thenReturn(Optional.empty());
-        Mockito.doNothing().when(notificationService).sendNotification(any(),any(),any());
+        when(notificationService.sendNotification(anyString(), anyString(), anyString())).thenReturn("Email Sent");
         user = new User(1,"nayamufaddal@gmail.com", "sd3edwfsdfdsfsdf", "Mufaddal", "Naya", "unverified", new Role(3, "USER"));
         when(userRepository.save(any())).thenReturn(user);
         when(verificationCodeRepository.save(any())).thenReturn(new VerificationCode());

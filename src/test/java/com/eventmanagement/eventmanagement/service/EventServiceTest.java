@@ -4,7 +4,7 @@ import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.entity.EventSender;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -82,7 +81,7 @@ class EventServiceTest {
         Date enddate = new Date();
         Event event = new Event(1, "Meeting", "patelnivedita@icloud.com", "descriptionofmeeting", "place", startdate, enddate, "conference");
         String s = eventService.deleteEvent(1);
-        Assert.assertNull(eventService.getEventById(1));
+        assertNull(eventService.getEventById(1));
         Assertions.assertEquals(s, "Event Removed");
 
         //test for exception handling when you try to remove a non-existent event;
@@ -113,10 +112,10 @@ class EventServiceTest {
 
     @Test
     void findEventsToday() {
-        when(eventRepository.findEventsToday()).thenReturn(anyInt());
+        when(eventRepository.findEventsToday()).thenReturn(1);
         int no = eventService.findEventsToday();
         assertNotNull(no);
-
+        assertEquals(no, 1);
     }
 
     @Test

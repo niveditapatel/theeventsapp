@@ -68,6 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 //                .anyRequest().permitAll();
                 .antMatchers("/public/**").permitAll()
+                .antMatchers("/api/getUser").hasRole("ADMIN")
                 .antMatchers("/api/deleteEvent/**").hasAnyRole("ADMIN","CREATOR")
                 .antMatchers("/api/addGroup**").hasAnyRole("ADMIN", "CREATOR")
                 .antMatchers("/api/addEvent**", "/api/updateEvent**").hasAnyRole("ADMIN", "CREATOR")
