@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/public")
+//@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "*")
 public class PublicController {
 
-    @CrossOrigin("*")
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String index() {
         return "Hello From Event Management API Spring Boot Application";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "Authentication Required";
+        return "success";
     }
 
 }

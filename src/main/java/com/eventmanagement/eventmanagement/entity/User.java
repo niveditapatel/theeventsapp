@@ -1,19 +1,19 @@
 package com.eventmanagement.eventmanagement.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
 @Data
+@Builder
 public class User {
     @Id
     @GeneratedValue
@@ -26,27 +26,14 @@ public class User {
     private String lastName;
     private String status;
 
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name="user_role",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id"))
 
-
-    private List<Role> roles;
-
-    public void addRole(Role role) {
-        roles.add(role);
+    public String getEmail() {
+        return email;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles)
-    {
-        this.roles = roles;
-    }
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public User(User user) {
         this.status = user.status;
@@ -54,6 +41,6 @@ public class User {
         this.email = user.email;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
-        this.roles = user.roles;
+        this.role = user.role;
     }
 }

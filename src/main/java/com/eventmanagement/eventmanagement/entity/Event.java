@@ -1,7 +1,9 @@
 package com.eventmanagement.eventmanagement.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Event_TBL")
+@Builder
+@Table(name = "event")
 public class Event {
 
     @Id
@@ -22,50 +25,15 @@ public class Event {
     @Column(name = "event_id")
     private int id;
     private String title;
-
     private String email;
     private String description;
-
     private String place;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startDateTime;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endDateTime;
     private String type;
-    private int maxParticipants;
 
 
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name="event_user",
-            joinColumns=@JoinColumn(name="event_id"),
-            inverseJoinColumns=@JoinColumn(name="user_id"))
 
-
-    private List<User> users;
-
-
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-    public void setEmails(List<User> users)
-    {
-        this.users = users;
-    }
-
-    public Event(Event event) {
-        this.title = event.title;
-        this.email = event.email;
-        this.description=event.description;
-        this.startDateTime=event.startDateTime;
-        this.endDateTime=event.endDateTime;
-
-        this.type=event.type;
-        this.maxParticipants=event.maxParticipants;
-
-
-    }
 }

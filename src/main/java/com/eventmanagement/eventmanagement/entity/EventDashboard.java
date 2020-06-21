@@ -11,19 +11,11 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class EventDashboard {
 
-
-    private String title;
-    private String email;
-    private String description;
-    private String place;
-    private String startDateTime;
-    private String endDateTime;
-
-
-
+    private String Title;
+    private String Host;
+    private String Venue;
+    private String Time;
 
 }
