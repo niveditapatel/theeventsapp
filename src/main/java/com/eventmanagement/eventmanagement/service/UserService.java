@@ -25,8 +25,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private NotificationService notificationService;
+//    @Autowired
+//    private NotificationService notificationService;
 
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -54,11 +54,11 @@ public class UserService {
         String text = "Hi " + user.getFirstName() + ",\n" +
                 "You need to verify your Account for Events Application:\n"
                 +"Verification Link:\n"+"http://localhost:8080/api/verify/"+unique_id;
-        try {
-            notificationService.sendNotification(email, subject, text);
-        } catch (MailException e) {
-            System.out.println("mail not sent " + e);
-        }
+//        try {
+//            notificationService.sendNotification(email, subject, text);
+//        } catch (MailException e) {
+//            System.out.println("mail not sent " + e);
+//        }
         verificationCodeRepository.save(vc);
         return "success";
 

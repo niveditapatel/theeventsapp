@@ -24,8 +24,8 @@ public class RegisteredService {
     UserRepository userRepository;
     @Autowired
     GroupRepository groupRepository;
-    @Autowired
-    NotificationService notificationService;
+//    @Autowired
+//    NotificationService notificationService;
 
     private final String SUCCESS = "success";
     private final String FAILED = "failed";
@@ -108,11 +108,11 @@ public class RegisteredService {
                 unseenEvent.setUserId(user.getId());
                 unseenEventRepository.save(unseenEvent);
                 //send email to each user;
-                try {
-                    notificationService.sendNotification(email, subject, text);
-                } catch (MailException e) {
-                    System.out.println("mail not sent " + e);
-                }
+//                try {
+//                    notificationService.sendNotification(email, subject, text);
+//                } catch (MailException e) {
+//                    System.out.println("mail not sent " + e);
+//                }
             }
         }
         return SUCCESS;

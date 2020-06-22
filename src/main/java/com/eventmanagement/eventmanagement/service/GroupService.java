@@ -15,8 +15,8 @@ public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
-    @Autowired
-    private NotificationService notificationService;
+//    @Autowired
+//    private NotificationService notificationService;
 
     @Autowired
     private UserRepository userRepository;
@@ -87,11 +87,11 @@ public class GroupService {
                     group.getGroupName() + "\n" +
                     "Created By:" + group.getCreatorEmail();
 
-            try {
-                notificationService.sendNotification(email, subject, text);
-            } catch (MailException e) {
-                System.out.println("mail not sent " + e);
-            }
+//            try {
+//                notificationService.sendNotification(email, subject, text);
+//            } catch (MailException e) {
+//                System.out.println("mail not sent " + e);
+//            }
         }
 
     }
