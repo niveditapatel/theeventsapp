@@ -53,7 +53,7 @@ public class UserService {
 
         String text = "Hi " + user.getFirstName() + ",\n" +
                 "You need to verify your Account for Events Application:\n"
-                +"Verification Link:\n"+"http://localhost:8080/api/verify/"+unique_id;
+                +"Verification Link:\n"+"http://backendproject-emb.apps.123.252.203.195.nip.io/api/verify/"+unique_id;
         try {
             notificationService.sendNotification(email, subject, text);
         } catch (MailException e) {
@@ -87,6 +87,24 @@ public class UserService {
         user.setStatus("active");
         userRepository.save(user);
         verificationCodeRepository.delete(vc.get());
-        return "<h1>success<h1><br><a href='http://localhost:3000/'>Login</a>";
+        return "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
+                "  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">\n" +
+                "  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n" +
+                "  <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js\"></script>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\n" +
+                "<div class=\"container\">\n" +
+                "  <div class=\"jumbotron\">\n" +
+                "    <h1>Email Verified!</h1>\n" +
+                "    <p><a href='http://eventmanagementapp-emf.apps.123.252.203.195.nip.io/'>Login Here</a></p>\n" +
+                "  </div>\n" +
+                "</div>\n" +
+                "\n" +
+                "</body>\n" +
+                "</html>\n";
     }
 }

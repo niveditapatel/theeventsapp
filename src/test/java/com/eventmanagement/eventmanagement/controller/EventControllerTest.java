@@ -202,9 +202,9 @@ class EventControllerTest {
 
     @Test
     void findEventsToday() throws Exception {
-        when(eventService.findEventsToday()).thenReturn(0);
+        when(eventService.findEventsToday(1)).thenReturn(0);
         MvcResult result = this.mockMvc
-                .perform(get("/api/getEventsToday"))
+                .perform(get("/api/getEventsToday/1"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();

@@ -21,7 +21,7 @@ public class Main {
 
         System.out.println(new GroupReceiver("dsf", "dfs", "asd"));
 
-        System.out.println(UUID.randomUUID());
+        System.out.println(passwordEncoder().encode("hello"));
         Main ma = new Main();
         ma.solve();
         System.out.println("");

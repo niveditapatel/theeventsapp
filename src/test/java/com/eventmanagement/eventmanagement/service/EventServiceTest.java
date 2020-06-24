@@ -95,15 +95,10 @@ class EventServiceTest {
     //test again
     @Test
     void findEventDashboard() throws ParseException {
-        List<Event> events = new ArrayList<>();
-        Date startdate = new Date();
-        Date enddate = new Date();
-        events.add(new Event(1, "Meeting", "patelnivedita@icloud.com", "descriptionofmeeting", "place", startdate, enddate, "conference"));
-        events.add(new Event(2, "Meeting2", "patelnivedita@icloud.com", "descriptionofmeeting", "place", startdate, enddate, "conference"));
-        //  List <EventDashboard> eventDashboardList = null;
-        // eventDashboardList.add(new EventDashboard("Meeting","patelnivedita@icloud.com","place", "2020-06-19 00:00:00"));
-        // eventDashboardList.add(new EventDashboard("Meeting2","patelnivedita@icloud.com","place", "2020-06-19 00:00:00"));
-        when(eventRepository.findEventByUser(anyInt())).thenReturn(events);
+        List<String> events = new ArrayList<>();
+        events.add("sdf,dsfsd,cxv,dsf,dsf,xc");
+        events.add("sdf,dsfsd,cxv,dsf,dsf,xc");
+        when(eventRepository.findEventDashboard(anyInt())).thenReturn(events);
         List<EventDashboard> result = eventService.findEventDashboard(1);
         Assertions.assertEquals(2, result.size());
 
@@ -112,8 +107,8 @@ class EventServiceTest {
 
     @Test
     void findEventsToday() {
-        when(eventRepository.findEventsToday()).thenReturn(1);
-        int no = eventService.findEventsToday();
+        when(eventRepository.findEventsToday(1)).thenReturn(1);
+        int no = eventService.findEventsToday(1);
         assertNotNull(no);
         assertEquals(no, 1);
     }

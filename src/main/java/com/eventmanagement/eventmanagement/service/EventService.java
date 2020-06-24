@@ -3,6 +3,7 @@ package com.eventmanagement.eventmanagement.service;
 import com.eventmanagement.eventmanagement.entity.Event;
 import com.eventmanagement.eventmanagement.entity.EventDashboard;
 import com.eventmanagement.eventmanagement.entity.EventSender;
+import com.eventmanagement.eventmanagement.entity.UpdatedEvent;
 import com.eventmanagement.eventmanagement.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -12,20 +13,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
-
-   // public Event saveEvent(Event event) {
-     //   return eventRepository.save(event);
-  //  }
-
-   // public List<Event> saveEvents(List<Event> events) {
-     //   return eventRepository.saveAll(events);
-   // }
 
     public List<Event> getEvents() {
         return eventRepository.findAll();
@@ -38,10 +32,6 @@ public class EventService {
     public Event getEventById(int id) {
         return eventRepository.findById(id).orElse(null);
     }
-
-    //public Event getEventByTitle(String title) {
-     //   return eventRepository.findByTitle(title);
-    //}
 
     public String deleteEvent(int id) {
         eventRepository.deleteById(id);
@@ -64,8 +54,8 @@ public class EventService {
         return eventDashboardList;
     }
 
-    public Integer findEventsToday() {
-        return eventRepository.findEventsToday();
+    public Integer findEventsToday(int user_id) {
+        return eventRepository.findEventsToday(user_id);
     }
 
     public List<EventSender> findEventByUser(int user_id) {
@@ -82,16 +72,20 @@ public class EventService {
         return eventRepository.findPendingResponse(user_id);
     }
 
-   public void updateEvent(String title, String description, String place, String type, Date startDateTime, Date endDateTime, int event_id)
-   {
-        System.out.println(title);
-           System.out.println(description);
-           System.out.println(place);
-           System.out.println(startDateTime);
-           System.out.println(endDateTime);
-           System.out.println(event_id);
-
-         eventRepository.updateEvent(title,description,place,type,startDateTime,endDateTime,event_id);
+   public String updateEvent(UpdatedEvent updatedEvent) {
+       Optional<Event> optionalEvent = eventRepository.findById(updatedEvent.getEvent_id());
+       if(!optionalEvent.isPresent()) {
+           return "Failed Cannot ";
+       }
+       Event event = optionalEvent.get();
+       event.setTitle(updatedEvent.getTitle());
+       event.setDescription(updatedEvent.getDescription());
+       event.setPlace(updatedEvent.getPlace());
+       event.setStartDateTime(updatedEvent.getStartDateTime());
+       event.setEndDateTime(updatedEvent.getEndDateTime());
+       event.setType(updatedEvent.getType());
+       eventRepository.save(event);
+       return "success";
    }
 
     public List<Event> findEventForUser(int user_id) {

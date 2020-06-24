@@ -72,9 +72,9 @@ public class EventController {
         return eventService.findEventByHost(email);
     }
 
-    @GetMapping("/getEventsToday")
-    public Integer findEventsToday () {
-        return eventService.findEventsToday();
+    @GetMapping("/getEventsToday/{user_id}")
+    public Integer findEventsToday (@PathVariable int user_id) {
+        return eventService.findEventsToday(user_id);
     }
 
     @GetMapping("/getPendingEvents/{user_id}")
@@ -87,22 +87,14 @@ public class EventController {
          registeredService.accept(user_id, event_id);
     }
 
-    @PostMapping("reject/{user_id}/{event_id}")
+    @PostMapping("/reject/{user_id}/{event_id}")
     public void reject(@PathVariable int user_id, @PathVariable int event_id) {
          registeredService.reject(user_id, event_id);
     }
 
-    @PostMapping("updateEvent")
-    public void updateEvent(@RequestBody UpdatedEvent updatedEvent){
-
-        String title= updatedEvent.getTitle();
-        String description= updatedEvent.getDescription();
-        String place= updatedEvent.getPlace();
-        Date startDateTime= updatedEvent.getStartDateTime();
-        Date endDateTime= updatedEvent.getStartDateTime();
-        String type=updatedEvent.getType();
-        int event_id= updatedEvent.getEvent_id();
-        eventService.updateEvent(title,description,place,type,startDateTime,endDateTime,event_id);
+    @PostMapping("/updateEvent")
+    public String updateEvent(@RequestBody UpdatedEvent updatedEvent){
+        return eventService.updateEvent(updatedEvent);
     }
 
 }

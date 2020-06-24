@@ -3,6 +3,7 @@ package com.eventmanagement.eventmanagement.controller;
 import com.eventmanagement.eventmanagement.entity.Role;
 import com.eventmanagement.eventmanagement.entity.User;
 import com.eventmanagement.eventmanagement.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,6 +49,16 @@ class UserControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @WithMockUser(username = "mufaddal.naya@gmail.com", roles = "ADMIN")
@@ -101,11 +113,18 @@ class UserControllerTest {
         assertThat(result.getResponse()).isNotNull();
     }
 
+    @WithMockUser(username = "mufaddal.naya@gmail.com", roles = "CREATOR")
     @Test
     void addUser() throws Exception {
         User user = getUsersList().get(0);
+
         when(userService.saveUser(any())).thenReturn("success");
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/userByEmail/mufaddal.naya@gmail.com");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/api/addUser")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(asJsonString(user))
+                .contentType(MediaType.APPLICATION_JSON);
+
         MvcResult result = mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andReturn();
