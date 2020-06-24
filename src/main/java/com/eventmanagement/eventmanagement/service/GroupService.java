@@ -38,10 +38,6 @@ public class GroupService {
 
     }
 
-   // public List<Group> saveGroups(List<Group> groups) {
-     //   return groupRepository.saveAll(groups);
-    //}
-
     public List<Group> getGroups() {
         return groupRepository.findAll();
     }
